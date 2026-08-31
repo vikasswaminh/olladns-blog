@@ -6,12 +6,26 @@ author: 'OllaDNS Security Team'
 tags: ['Guide', 'DNSSEC', 'DNS security']
 ---
 
-<div class="content-card">
-  <div class="premium-card-header">
-    <span class="card-badge">TL;DR</span>
-    <h3>DNSSEC in 60 Seconds</h3>
+<div class="tldr-card">
+  <div class="tldr-header">
+    <span class="tldr-badge">TL;DR</span>
+    <span class="tldr-icon">⚡</span>
+    <h3 class="tldr-title">DNSSEC in 60 Seconds</h3>
   </div>
-  <p>DNSSEC (Domain Name System Security Extensions) is a set of cryptographic add ons to DNS that let a resolver verify a DNS answer that really came from the domain's authoritative source and wasn't altered in transit. It works by having every DNS zone sign its records with a private key, publishing the matching public key, and chaining trust from the domain all the way up to the root zone, so a resolver can follow that chain and mathematically confirm the answer is genuine. DNSSEC is very good at stopping DNS spoofing and cache poisoning the attacks where someone forges a fake answer. It does nothing for privacy (it doesn't encrypt anything), and it doesn't block phishing domains, malware callbacks, or malicious but legitimately signed sites. That's why DNSSEC and protective DNS solve different problems and why serious DNS security programs run both.</p>
+  <ul class="tldr-list">
+    <li>
+      <span class="tldr-check">✓</span>
+      <span>DNSSEC (Domain Name System Security Extensions) is a set of cryptographic add-ons to DNS that let a resolver verify a DNS answer really came from the domain's authoritative source and wasn't altered in transit.</span>
+    </li>
+    <li>
+      <span class="tldr-check">✓</span>
+      <span>It works by having every DNS zone sign its records with a private key, publishing the matching public key, and chaining trust from the domain all the way up to the root zone, so a resolver can follow that chain and mathematically confirm the answer is genuine.</span>
+    </li>
+    <li>
+      <span class="tldr-check">✓</span>
+      <span>DNSSEC is very good at stopping DNS spoofing and cache poisoning (the attacks where someone forges a fake answer). It does nothing for privacy (it doesn't encrypt anything), and it doesn't block phishing domains or malware.</span>
+    </li>
+  </ul>
 </div>
 
 <div class="content-card">
@@ -19,30 +33,81 @@ tags: ['Guide', 'DNSSEC', 'DNS security']
     <span class="card-badge">KEY TAKEAWAYS</span>
     <h3>What You'll Learn</h3>
   </div>
-  <ul>
-    <li><strong>What DNSSEC Is:</strong> Adds digital signatures to DNS records so a resolver can cryptographically verify that an answer is authentic and hasn't been tampered with.</li>
-    <li><strong>How the Chain of Trust Works:</strong> DNSSEC validation follows a chain from the root zone down through each TLD to the domain itself, with every link vouching for the next.</li>
-    <li><strong>The Core Records:</strong> Introduces new record types that carry signatures (RRSIG), public keys (DNSKEY), delegation signatures (DS), and proof that a record doesn't exist (NSEC/NSEC3).</li>
-    <li><strong>What DNSSEC Actually Stops:</strong> Purpose-built to defeat DNS spoofing and cache poisoning.</li>
-    <li><strong>What DNSSEC Doesn't Do:</strong> Doesn't encrypt queries, doesn't block phishing or malware domains, and doesn't stop a perfectly signed but malicious domain.</li>
+  <ul class="grid-list">
+    <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>What DNSSEC Is:</strong> Adds digital signatures to DNS records so a resolver can cryptographically verify that an answer is authentic and hasn't been tampered with.</div></li>
+    <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>How the Chain of Trust Works:</strong> DNSSEC validation follows a chain from the root zone down through each TLD to the domain itself, with every link vouching for the next.</div></li>
+    <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>The Core Records:</strong> Introduces new record types that carry signatures (RRSIG), public keys (DNSKEY), delegation signatures (DS), and proof that a record doesn't exist (NSEC/NSEC3).</div></li>
+    <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>What DNSSEC Actually Stops:</strong> Purpose-built to defeat DNS spoofing and cache poisoning.</div></li>
+    <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>What DNSSEC Doesn't Do:</strong> Doesn't encrypt queries, doesn't block phishing or malware domains, and doesn't stop a perfectly signed but malicious domain.</div></li>
   </ul>
 </div>
 
-| Technology | Main purpose | Stops spoofing? | Encrypts DNS? | Blocks malicious domains? |
-| :--- | :--- | :--- | :--- | :--- |
-| Traditional DNS | Name resolution | ❌ | ❌ | ❌ |
-| DNSSEC | Authenticity/integrity | ✅ | ❌ | ❌ |
-| DoH/DoT/DoQ | DNS privacy | ❌ | ✅ | ❌ |
-| Protective DNS | Threat blocking | Partially/indirectly | Depends | ✅ |
+
+<div class="content-card table-card">
+  <div class="premium-card-header">
+    <span class="card-badge">AT A GLANCE</span>
+    <h3>DNS Security Technologies Compared</h3>
+  </div>
+
+<div class="premium-table-container">
+  <table class="premium-table">
+    <thead>
+      <tr>
+        <th>Technology</th>
+        <th>Main purpose</th>
+        <th>Stops spoofing?</th>
+        <th>Encrypts DNS?</th>
+        <th>Blocks malicious domains?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Traditional DNS</strong></td>
+        <td>Name resolution</td>
+        <td><svg class="icon-no" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></td>
+        <td><svg class="icon-no" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></td>
+        <td><svg class="icon-no" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></td>
+      </tr>
+      <tr>
+        <td><strong>DNSSEC</strong></td>
+        <td>Authenticity / integrity</td>
+        <td><svg class="icon-yes" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td>
+        <td><svg class="icon-no" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></td>
+        <td><svg class="icon-no" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></td>
+      </tr>
+      <tr>
+        <td><strong>DoH / DoT / DoQ</strong></td>
+        <td>DNS privacy</td>
+        <td><svg class="icon-no" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></td>
+        <td><svg class="icon-yes" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td>
+        <td><svg class="icon-no" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></td>
+      </tr>
+      <tr>
+        <td><strong>Protective DNS</strong></td>
+        <td>Threat blocking</td>
+        <td><svg class="icon-partial" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg> <span style="font-size:0.85em; color:var(--muted); margin-left:4px;">Indirectly</span></td>
+        <td><span style="font-size:0.85em; color:var(--muted);">Depends</span></td>
+        <td><svg class="icon-yes" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+
+
 
 <div class="content-card">
 <span class="section-badge">SECTION 1</span>
 
 ## The trust problem nobody designed DNS to solve
 
-When DNS was built in the early 1980s, the internet was a small, trusting community of research institutions. Nobody was trying to trick anybody. If a DNS server said, "this domain lives at this IP address," every other machine simply believed it. There was no signature, no verification, no way to check the protocol assumed good faith because, at the time, good faith was a safe assumption.
+<p class="lead-text">When DNS was built in the early 1980s, the internet was a small, trusting community of research institutions. Nobody was trying to trick anybody. If a DNS server said, "this domain lives at this IP address," every other machine simply believed it.</p>
 
-That assumption aged badly.
+<blockquote class="premium-quote">
+  "There was no signature, no verification, no way to check. The protocol assumed good faith because, at the time, good faith was a safe assumption. That assumption aged badly."
+</blockquote>
 
 The cracks started showing early. DNS responses travel over UDP, a lightweight, connectionless protocol with no built-in authentication. A resolver sends a query and waits for a reply that matches a few identifying fields, mostly a 16-bit transaction ID and the source port. If an attacker can guess or brute-force those values and get a forged answer back to the resolver before the real one arrives, the resolver has no way to tell the difference. It just accepts the first plausible looking response and moves on. That is the entire mechanism behind DNS cache poisoning, and for a protocol carrying this much of the internet's trust, a 16-bit guessing game is an alarmingly thin wall.
 
@@ -61,9 +126,22 @@ That's the gap DNSSEC exists to close. Not "make forgery harder to pull off," bu
 
 DNSSEC the Domain Name Security Extensions is a suite of extensions to standard DNS that adds cryptographic signatures to DNS data. Every time a signed zone answers a query, it doesn't just hand back a record; it hands back the record along with a digital signature proving that the record came from the legitimate holder of that zone's private key and hasn't been altered since it was signed.
 
-It helps to be precise about what that sentence promises, because DNSSEC is one of the most misunderstood acronyms in networking. DNSSEC guarantees authenticity and integrity that an answer really came from the domain's authoritative source, and that nobody tampered with it along the way. It does not guarantee confidentiality; anyone watching the network traffic can still see exactly which domains are being looked up at, because nothing about DNSSEC involves encryption. That distinction trips up a lot of people who assume "adds security" automatically means "adds privacy." DNSSEC and encrypted DNS (DoH, DoT, DoQ) solve two completely different problems, and one does not substitute for the other.
+It helps to be precise about what that sentence promises, because DNSSEC is one of the most misunderstood acronyms in networking. <div class="comparison-grid">
+  <div class="comparison-card accent">
+    <h4>Authenticity & Integrity</h4>
+    <p>DNSSEC guarantees that an answer really came from the domain's authoritative source, and that nobody tampered with it along the way. This is its entire purpose.</p>
+  </div>
+  <div class="comparison-card neutral">
+    <h4>Confidentiality</h4>
+    <p>DNSSEC does <strong>not</strong> guarantee confidentiality. Anyone watching the network can still see which domains are being looked up, because nothing about DNSSEC involves encryption.</p>
+  </div>
+</div> That distinction trips up a lot of people who assume "adds security" automatically means "adds privacy." DNSSEC and encrypted DNS (DoH, DoT, DoQ) solve two completely different problems, and one does not substitute for the other.
 
-Think about it less like a locked envelope and more like a notarized document. Anyone can still read what's written on it, DNSSEC never hides the content, but a notary's seal proves the document is genuine and unaltered. If someone tries to swap out the contents or forge a copy, the seal won't match, and anyone checking can tell immediately. DNS with DNSSEC works the same way: the answer is public, but it's signed, and that signature either checks out, or it doesn't.
+<blockquote class="premium-quote">
+  Think about it less like a locked envelope and more like a notarized document. Anyone can still read what's written on it, but a notary's seal proves the document is genuine and unaltered.
+</blockquote>
+
+If someone tries to swap out the contents or forge a copy, the seal won't match, and anyone checking can tell immediately. DNS with DNSSEC works the same way: the answer is public, but it's signed, and that signature either checks out, or it doesn't.
 
 The extensions were first standardized in the early 2000s and went through several revisions before the modern version DNSSEC-bis, described primarily in RFC 4033, 4034, and 4035 stabilized. The root zone itself was signed in 2010, which was the moment DNSSEC transitioned from "an interesting proposal" to "a protocol with an actual root of trust that the whole internet could theoretically build on."
 
@@ -78,11 +156,20 @@ DNSSEC's cleverest design decision isn't the signing itself public key cryptogra
 
 Here's the shape of it. DNS is hierarchical root, then top level domain, then the domain itself, then subdomains. DNSSEC mirrors that hierarchy with a chain of cryptographic trust, where each level vouches for the level below it.
 
-Start at the bottom. A domain owner or more realistically, their DNS hosting provider signs their zone's records with a private key. That produces signatures the resolver can check against a matching public key, which is published in the zone itself. So far, that only proves internal consistency: the records match the public key that's published alongside them. It doesn't yet prove that the public key itself is legitimate, because anyone could publish a fake public key next to fake records and have them match perfectly.
-
-This is where the chain matters. The domain's public key gets hashed, and that hash is submitted to the parent zone the TLD, like .com as a special record called a DS (Delegation Signer) record. The TLD then signs that DS record with its own key. Now there's a link: the parent zone is vouching, cryptographically, for the child zone's key.
-
-Climb one more level. The TLD's own public key gets hashed and submitted to the root zone the same way, and the root signs it. And the root itself? Its public key, the very top of the chain, is the one piece that must be trusted directly, not cryptographically derived from something higher, because there's nothing higher. That root key is distributed out-of-band, baked into resolver software and operating systems as a trust anchor, the same way your browser ships with a preloaded list of trusted certificate authorities.
+<div class="comparison-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+  <div class="comparison-card accent">
+    <h4>1. The Domain</h4>
+    <p>The DNS hosting provider signs the zone's records with a private key, publishing the public key in the zone. But this only proves internal consistency; anyone could publish a fake key next to fake records.</p>
+  </div>
+  <div class="comparison-card neutral">
+    <h4>2. The TLD</h4>
+    <p>The domain's public key is hashed and submitted to the parent TLD (like .com) as a DS record. The TLD signs this DS record, vouching cryptographically for the child zone.</p>
+  </div>
+  <div class="comparison-card accent">
+    <h4>3. The Root</h4>
+    <p>The TLD's public key is submitted to the Root Zone, which signs it. The Root's own public key is trusted directly (like a preloaded Certificate Authority in your browser), anchoring the whole chain.</p>
+  </div>
+</div>
 
 Put together, a validating resolver checking olladns.com doesn't just check one signature. It walks the whole chain: verify the root's signature over the .com DS record using the trusted root key, verify. com’s signature over olladns.com's DS record using the now verified .com key, then verify olladns.com's own record signatures using the now verified olladns.com key. Every link depends on the one above it, all the way back to a single anchor that everyone already trusts. Break any link a missing DS record, a signature that doesn't match, an expired signature and the whole chain fail, and the resolver treats the answer as unverifiable rather than quietly accepting it.
 
@@ -97,6 +184,14 @@ This is the same fundamental idea as the certificate chain your browser checks f
 
 DNSSEC doesn't replace ordinary DNS records A, AAAA, MX, and the rest still work exactly as they always did. It adds a handful of new record types alongside them, each doing a specific job in the signing and validation process.
 
+<div class="callout-box">
+  <svg class="callout-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+  <div class="callout-content">
+    <span class="callout-title">Pro Tip</span>
+    <p>DNSSEC was not designed to encrypt data, it was designed to authenticate it. Think of it like a wax seal on a public envelope: anyone can read the letter, but the seal proves who sent it and that it wasn't modified.</p>
+  </div>
+</div>
+
 - **RRSIG (Resource Record Signature)** is the actual digital signature. Every set of records of a given type all the A records for a domain, for instance gets one RRSIG covering that set. When a resolver receives an answer, it also receives the matching RRSIG and uses it to mathematically confirm the records haven't been altered since they were signed.
 
 - **DNSKEY** holds the public key used to verify those signatures. A zone typically publishes two kinds of DNSKEY, which is a detail worth understanding because it explains a lot about how DNSSEC operations run day to day.
@@ -109,16 +204,23 @@ Together, these record types let a resolver validate not just "here's the real a
 
 </div>
 
-<div class="content-card content-card-alt">
+<div class="content-card">
 <span class="section-badge">SECTION 5</span>
 
 ## Zone signing keys vs. key signing keys and why DNSSEC splits them
 
 If you look closely at how a signed zone operates, you'll notice it doesn't use just one key pair — it typically uses two, with different jobs and different lifespans. This split confuses a lot of people coming to DNSSEC for the first time, but the reasoning behind it is genuinely elegant once it clicks.
 
-**The Zone Signing Key (ZSK)** signs the actual DNS records in the zone the A records, the MX records, everything a resolver looks up day to day. Because DNS zones change constantly and get signed and re-signed frequently, the ZSK needs to be usable often and, for operational sanity, rotate relatively regularly.
-
-**The Key Signing Key (KSK)** has a narrower, more important job: it only signs the DNSKEY record set itself essentially, it vouches for the ZSK. KSK’s hash is what gets submitted to the parent zone as the DS record, meaning the KSK is the actual link in the chain of trust, not the ZSK.
+<div class="comparison-grid">
+  <div class="comparison-card accent">
+    <h4>The Zone Signing Key (ZSK)</h4>
+    <p>Signs the actual DNS records in the zone (the A records, MX records, etc). Because zones change and get re-signed frequently, the ZSK is used often and rotated relatively regularly for good security hygiene. It is completely internal to the zone.</p>
+  </div>
+  <div class="comparison-card neutral">
+    <h4>The Key Signing Key (KSK)</h4>
+    <p>Has a narrower, more important job: it only signs the DNSKEY record set, vouching for the ZSK. The KSK's hash is submitted to the parent zone as the DS record, meaning the KSK is the actual link in the chain of trust. Rotating it is an expensive, risky operation.</p>
+  </div>
+</div>
 
 Splitting the two matters because they have very different rotation costs. Rotating a ZSK is entirely internal to the zone, sign the new records, publish the new key, done, nobody outside the zone needs to be told. Rotating a KSK is expensive, because it requires updating the DS record at the parent zone, which usually means going through a registrar, and if that update isn't propagated and verified correctly, the entire chain of trust for the domain breaks until it's fixed. By keeping the frequently rotated key (ZSK) separate from the rarely rotated, chain-critical key (KSK), DNSSEC lets operators rotate signing material often good cryptographic hygiene without constantly touching the fragile, externally dependent DS record link.
 
@@ -126,22 +228,22 @@ Key rollovers are, in practice, one of the trickiest operational parts of runnin
 
 </div>
 
-<div class="content-card content-card-alt">
+<div class="content-card">
 <span class="section-badge">SECTION 6</span>
 
 ## Following one DNSSEC-validated lookup, step by step
 
 It's easiest to see how all these pieces fit together by walking through an actual lookup, the way you'd walk through an ordinary DNS resolution.
 
-A device queries a validating recursive resolver for olladns.com. Critically, this must be a validating resolver, one specifically configured to check DNSSEC signatures. A non-validating resolver will happily fetch and return signed records without ever checking whether the signatures are valid, which means DNSSEC protection only exists if something in the path is doing the verification work.
+It's easiest to see how all these pieces fit together by walking through an actual lookup:
 
-The resolver starts at the root, just like an ordinary lookup, but now it's also collecting signature data along the way. It asks the root for the .com TLD's information and receives, alongside the referral, the signed DS record for .com and confirms it against the root's trusted key.
-
-It asks. com’s TLD servers for olladns.com's authoritative servers and again receives a signed DS record this time for olladns.com which it validates using the now confirmed .com key.
-
-It asks olladns.com's authoritative server for the actual A record and gets back the record plus its RRSIG. The resolver checks that signature against olladns.com's DNSKEY, which it already validated via the DS record chain a moment ago.
-
-Every link checks out. The resolver now knows, with cryptographic certainty rather than blind trust, that the answer is genuine, unmodified, and came from the zone that's supposed to be authoritative for it. It marks the response as Authenticated Data (AD) a flag in the DNS response that tells the querying application, “This answer passed DNSSEC validation" and hands the IP address back to the device.
+<ul class="grid-list">
+  <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>1. The Query:</strong> A device queries a validating recursive resolver for olladns.com. (The resolver MUST be configured to validate, otherwise the protection doesn't exist).</div></li>
+  <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>2. The Root:</strong> The resolver starts at the root, collecting signature data. It receives the signed DS record for .com and confirms it against the root's trusted key.</div></li>
+  <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>3. The TLD:</strong> It asks .com's TLD servers for olladns.com and receives the signed DS record for olladns.com, validating it with the .com key.</div></li>
+  <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>4. The Authoritative Server:</strong> It asks olladns.com for the A record and its RRSIG, checking the signature against olladns.com's DNSKEY.</div></li>
+  <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>5. The Verification:</strong> Every link checks out. The resolver marks the response as Authenticated Data (AD) and hands the IP back to the device with cryptographic certainty.</div></li>
+</ul>
 
 If, instead, any signature had failed to validate say, an attacker had managed to inject a forged answer somewhere along the path the resolver would detect the mismatch and refuse to return the bad data at all. Depending on configuration, it would return a SERVFAIL error rather than silently pass along a poisoned answer. That refusal is the entire point. Ordinary DNS has no mechanism to say, "I don't trust this answer, so I won't use it." DNSSEC gives resolvers exactly that mechanism.
 
@@ -156,11 +258,18 @@ This entire process adds a small amount of overhead extra records to fetch, extr
 
 It's worth being concrete about DNSSEC's actual threat model, because vague claims like "DNSSEC secures DNS" invite the wrong expectations.
 
-DNSSEC is purpose-built to stop DNS spoofing and cache poisoning attacks where a malicious actor forges a DNS response and tries to get a resolver or end device to accept it as genuine. This includes the classic Kaminsky-style cache poisoning attack, on-path attackers injecting fake responses into unencrypted DNS traffic, and man-in-the-middle scenarios where an attacker positioned on the network path tries to substitute their own answer for the real one. In every one of these cases, the fundamental attack relies on the target, accepting an answer that didn't come from the legitimate authoritative source. DNSSEC's whole design is aimed squarely at making that kind of forgery cryptographically detectable.
-
-It also closes a subtler gap: unauthorized zone modifications going unnoticed downstream. If an attacker somehow manages to alter caught or transiting DNS data without compromising the actual authoritative server, DNSSEC validation catches the tampering because the altered data no longer matches its signature. This matters for scenarios beyond classic cache poisoning compromised intermediate infrastructure, misconfigured caching layers, or any point in the resolution chain where data could be silently modified in transit.
-
-And it protects the negative answer the "this record doesn't exist" response through NSEC/NSEC3, closing off a class of attack where a forged "not found" response could be used to hide a legitimate record or claim a domain doesn't resolve when it does.
+<div class="callout-box">
+  <svg class="callout-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.286-3m5.286 3l-5.286 3-5.286-3V7l5.286-3 5.286 3v5z"></path></svg>
+  <div class="callout-content">
+    <span class="callout-title">Core Protections</span>
+    <p>DNSSEC's entire design is aimed squarely at making forgery cryptographically detectable. It stops three main things:</p>
+    <ul style="margin: 0; padding-left: 20px; font-size: 15.5px; line-height: 1.7; color: var(--text-2);">
+      <li><strong>Spoofing & Cache Poisoning:</strong> Defeats classic Kaminsky-style attacks and on-path forgery by ensuring the resolver only accepts data from the legitimate source.</li>
+      <li><strong>Unauthorized Modifications:</strong> Catches tampering in transit. If data is altered downstream without compromising the authoritative server, the signature fails.</li>
+      <li><strong>Forged Negative Answers:</strong> Protects the "record doesn't exist" response via NSEC/NSEC3, preventing attackers from hiding legitimate records.</li>
+    </ul>
+  </div>
+</div>
 
 That's a genuinely important set of protections. Cache poisoning attacks, when they succeed, are almost invisible to victims there's no broken padlock, no obvious warning sign, just a browser quietly connecting to the wrong server while everything looks normal. DNSSEC removes that blind spot at the DNS layer specifically.
 
@@ -222,27 +331,44 @@ A handful of misconceptions about DNSSEC circulate constantly and clearing them 
 
 </div>
 
-<div class="content-card content-card-alt">
+<div class="content-card">
 <span class="section-badge">SECTION 11</span>
 
 ## How to check if a domain has DNSSEC and how to deploy it
 
 Checking whether DNSSEC is active on a domain is straightforward and doesn't require specialized tooling. Running a dig query with the +dnssec flag against a domain will show whether RRSIG records are present in the response. Numerous free online DNSSEC checkers will walk the entire chain of trust for a domain and flag exactly where it breaks, if it does whether the DS record is missing at the parent, whether a signature has expired, or whether the chain validates cleanly end to end. For anyone troubleshooting a domain that mysteriously stopped resolving for some users but not others, checking DNSSEC chain validity is one of the first things worth ruling out, because a broken chain will silently fail only for resolvers that validate, while non-validating resolvers keep working normally producing exactly the kind of "it works for me" confusion that makes these incidents frustrating to diagnose.
 
-Deploying DNSSEC on a domain you control generally comes down to three coordinated steps. First, the authoritative DNS provider needs to sign the zone generating the ZSK and KSK pair and beginning to publish signed records. Most modern managed DNS providers automate this almost entirely, reducing what used to be a manual cryptography exercise to a toggle in a dashboard. Second, the resulting DS record needs to be submitted to the domain's registrar, which passes it up to the TLD to create the link in the chain of trust chains. This step still requires action at the registrar and is the most missed or fumbled step. Third, and often overlooked, ongoing monitoring needs to be in place to catch expiring signatures or failed key rollovers before they cause an outage, because DNSSEC's failure mode is unforgiving in a way that ordinary DNS misconfiguration usually isn't.
+Deploying DNSSEC on a domain you control generally comes down to three coordinated steps.
+
+<ul class="grid-list">
+  <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>Step 1: Sign the Zone.</strong> The authoritative DNS provider generates the ZSK and KSK pair and publishes signed records. Modern managed DNS providers automate this to a simple toggle.</div></li>
+  <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>Step 2: Submit the DS Record.</strong> The resulting DS record is submitted to the registrar, passing it up to the TLD to link the chain of trust. (This is the most commonly missed step!)</div></li>
+  <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>Step 3: Ongoing Monitoring.</strong> You must monitor for expiring signatures or failed key rollovers to prevent unforgiving outages.</div></li>
+</ul>
 
 For organizations evaluating whether to deploy DNSSEC on their own domains, the calculus has shifted meaningfully in recent years as major DNS hosting providers have made signing close to automatic. The operational risk that made DNSSEC scary a decade ago manual key management, easy to botch rollovers, has been substantially reduced by tooling. The remaining case against deploying it tends to be inertia rather than genuine technical risk, though the coordination requirement with a registrar still trips up teams that don't test the DS record submission carefully.
 
 </div>
 
-<div class="content-card content-card-alt">
+<div class="content-card">
 <span class="section-badge">SECTION 12</span>
 
 ## Where DNSSEC fits in a real DNS security strategy
 
 The most useful way to think about DNSSEC is as one deliberately narrow layer in a stack, not a comprehensive DNS security program on its own. It answers one question extremely well "is this specific DNS answer authentic?" and answers no other question at all.
 
-A complete approach to DNS-layer security typically layers several things on top of each other. DNSSEC validation handles authenticity, closing off spoofing and cache poisoning at the protocol level. Encrypted transport via DoH, DoT, or DoQ handles confidentiality, keeping which domains are being queried private from network observers. And critically, since neither of the above touches it real-time threat intelligence and domain reputation filtering handle the much larger and more commonly exploited risk category: malicious domains that are perfectly legitimate from a DNS protocol standpoint but exist purely to phish credentials, deliver malware, or serve as command-and-control infrastructure for something already inside a network.
+<div class="callout-box">
+  <svg class="callout-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.286-3m5.286 3l-5.286 3-5.286-3V7l5.286-3 5.286 3v5z"></path></svg>
+  <div class="callout-content">
+    <span class="callout-title">The Complete DNS Security Stack</span>
+    <p>A complete approach to DNS-layer security layers several things on top of each other:</p>
+    <ul style="margin: 0; padding-left: 20px; font-size: 15.5px; line-height: 1.7; color: var(--text-2);">
+      <li><strong>DNSSEC Validation</strong> handles authenticity, closing off spoofing and cache poisoning.</li>
+      <li><strong>Encrypted Transport (DoH/DoT/DoQ)</strong> handles confidentiality, keeping queries private.</li>
+      <li><strong>Real-time Threat Intelligence</strong> handles malicious domain blocking, phishing, and malware.</li>
+    </ul>
+  </div>
+</div>
 
 This is exactly the layering that protective DNS platforms are built around. DNSSEC validation is baseline hygiene the resolver should never accept a forged answer. But the attacks security teams deal with day to day are overwhelmingly not forged DNS responses; they're real, validly resolving domains that happen to be malicious, registered fresh, dressed up to look like something trustworthy. Stopping those requires the resolver to be making an active judgment call “should this domain resolve at all, given what we know about it” which is a fundamentally different function than DNSSEC's "is this answer genuine." Because virtually every stage of an attack chain, from a phishing click through malware installation to data exfiltration, touches DNS at some point, a resolver sitting in that path with both cryptographic validation and active threat filtering catches categories of attack that either capability alone would miss.
 

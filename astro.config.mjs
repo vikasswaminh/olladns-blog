@@ -5,11 +5,13 @@ import { SITE } from './src/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://olladns.com',
-  base: '/blog',
+  site: 'https://blog.olladns.com',
   trailingSlash: 'ignore',
   integrations: [sitemap()],
   markdown: {
     shikiConfig: { theme: 'github-dark', wrap: true },
   },
+  devToolbar: {
+    enabled: false
+  }
 });
