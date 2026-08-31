@@ -6,11 +6,11 @@ export const SITE = {
   brand: 'OllaDNS',
   title: 'OllaDNS Blog',
   description: 'Guides, tips, and product updates from the OllaDNS team.',
-  url: 'https://blogs.olladns.com',
+  url: 'https://olladns.com/blog',
   marketingUrl: 'https://olladns.com',
   marketingLabel: 'olladns.com',
   author: 'OllaDNS Team',
-  accent: '#f97316',
+  accent: '#2f6fed',
   tagline: 'DNS that just works.',
   locale: 'en',
 } as const;
