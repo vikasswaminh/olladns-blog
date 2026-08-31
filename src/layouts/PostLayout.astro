@@ -2,13 +2,15 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 import { SITE } from '../config';
 import { readingTime } from '../utils/posts';
 
 interface Props {
   post: CollectionEntry<'blog'>;
+  headings?: any[];
 }
-const { post } = Astro.props;
+const { post, headings } = Astro.props;
 const { title, description, pubDate, updatedDate, author, tags, cover } = post.data;
 const minutes = readingTime(post.body);
 const canonical = new URL(`/blog/${post.slug}/`, Astro.site).href;
@@ -40,7 +42,6 @@ const jsonLd = {
 >
   <article class="post">
     <header class="post-header">
-      <p class="post-eyebrow"><a href="/">← All posts</a></p>
       <h1 class="post-title">{title}</h1>
       <p class="post-meta">
         <FormattedDate date={pubDate} />
@@ -62,12 +63,18 @@ const jsonLd = {
       }
     </header>
     {cover && <img class="post-cover" src={cover} alt="" loading="lazy" />}
-    <div class="prose">
-      <slot />
+    
+    <div class="post-content-layout">
+      {headings && headings.length > 0 && <TableOfContents headings={headings} />}
+      <div class="prose">
+        <slot />
+      </div>
     </div>
+
     <footer class="post-footer">
       <a class="btn" href={SITE.marketingUrl}>Learn more about {SITE.brand} →</a>
     </footer>
   </article>
+
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </BaseLayout>

@@ -1,0 +1,33 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+export interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// Filter to only include h2 and h3 headings for a cleaner TOC
+const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{
+  filteredHeadings.length > 0 && (
+    <aside class="toc-container">
+      <nav class="toc">
+        <h2 class="toc-title">Table of Contents</h2>
+        <ul>
+          {filteredHeadings.map((heading) => (
+            <li class={`toc-item depth-${heading.depth}`}>
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+  )
+}
