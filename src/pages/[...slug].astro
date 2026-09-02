@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import PostLayout from '../../layouts/PostLayout.astro';
-import { getPublishedPosts } from '../../utils/posts';
+import PostLayout from '../layouts/PostLayout.astro';
+import { getPublishedPosts } from '../utils/posts';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
