@@ -6,27 +6,21 @@ author: 'OllaDNS Security Team'
 tags: ['Guide', 'DNSSEC', 'DNS security']
 ---
 
-<div class="tldr-card">
+
+<div class="content-card">
   <div class="tldr-header">
     <span class="tldr-badge">TL;DR</span>
     <span class="tldr-icon">⚡</span>
     <h3 class="tldr-title">DNSSEC in 60 Seconds</h3>
   </div>
-  <ul class="tldr-list">
-    <li>
-      <span class="tldr-check">✓</span>
-      <span>DNSSEC (Domain Name System Security Extensions) is a set of cryptographic add-ons to DNS that let a resolver verify a DNS answer really came from the domain's authoritative source and wasn't altered in transit.</span>
-    </li>
-    <li>
-      <span class="tldr-check">✓</span>
-      <span>It works by having every DNS zone sign its records with a private key, publishing the matching public key, and chaining trust from the domain all the way up to the root zone, so a resolver can follow that chain and mathematically confirm the answer is genuine.</span>
-    </li>
-    <li>
-      <span class="tldr-check">✓</span>
-      <span>DNSSEC is very good at stopping DNS spoofing and cache poisoning (the attacks where someone forges a fake answer). It does nothing for privacy (it doesn't encrypt anything), and it doesn't block phishing domains or malware.</span>
-    </li>
-  </ul>
+
+  <p class="tldr-paragraph">✓
+      DNSSEC (Domain Name System Security Extensions) is a set of cryptographic add-ons to DNS that let a resolver verify a DNS answer really came from the domain's authoritative source and wasn't altered in transit. ✓
+      It works by having every DNS zone sign its records with a private key, publishing the matching public key, and chaining trust from the domain all the way up to the root zone, so a resolver can follow that chain and mathematically confirm the answer is genuine. ✓
+      DNSSEC is very good at stopping DNS spoofing and cache poisoning (the attacks where someone forges a fake answer). It does nothing for privacy (it doesn't encrypt anything), and it doesn't block phishing domains or malware.</p>
 </div>
+
+
 
 <div class="content-card">
   <div class="premium-card-header">
@@ -43,7 +37,7 @@ tags: ['Guide', 'DNSSEC', 'DNS security']
 </div>
 
 
-<div class="content-card table-card">
+<div class="content-card">
   <div class="premium-card-header">
     <span class="card-badge">AT A GLANCE</span>
     <h3>DNS Security Technologies Compared</h3>
@@ -93,12 +87,10 @@ tags: ['Guide', 'DNSSEC', 'DNS security']
   </table>
 </div>
 
-</div>
 
 
 
 
-<div class="content-card">
 <span class="section-badge">SECTION 1</span>
 
 ## The trust problem nobody designed DNS to solve
@@ -126,9 +118,7 @@ tags: ['Guide', 'DNSSEC', 'DNS security']
   </div>
 </div>
 
-</div>
 
-<div class="content-card">
 <span class="section-badge">SECTION 2</span>
 
 ## What is DNSSEC?
@@ -160,9 +150,7 @@ If someone tries to swap out the contents or forge a copy, the seal won't match,
 
 The extensions were first standardized in the early 2000s and went through several revisions before the modern version DNSSEC-bis, described primarily in RFC 4033, 4034, and 4035 stabilized. The root zone itself was signed in 2010, which was the moment DNSSEC transitioned from "an interesting proposal" to "a protocol with an actual root of trust that the whole internet could theoretically build on."
 
-</div>
 
-<div class="content-card">
 <span class="section-badge">SECTION 3</span>
 
 ## The chain of trust: how signatures link together
@@ -190,9 +178,7 @@ Put together, a validating resolver checking olladns.com doesn't just check one 
 
 This is the same fundamental idea as the certificate chain your browser checks for HTTPS, a chain of vouching that terminates in something everyone agreed to trust in advance. DNSSEC just applies it to the question "is this DNS answer real?" instead of "is this website's certificate real?"
 
-</div>
 
-<div class="content-card">
 <span class="section-badge">SECTION 4</span>
 
 ## The new record types DNSSEC introduces
@@ -217,9 +203,7 @@ DNSSEC doesn't replace ordinary DNS records A, AAAA, MX, and the rest still work
 
 Together, these record types let a resolver validate not just "here's the real answer" but also "here's the real answer, and it's genuinely that there is no answer” both of which matter, because attackers can exploit either direction if it's left unsigned.
 
-</div>
 
-<div class="content-card">
 <span class="section-badge">SECTION 5</span>
 
 ## Zone signing keys vs. key signing keys and why DNSSEC splits them
@@ -241,9 +225,7 @@ Splitting the two matters because they have very different rotation costs. Rotat
 
 Key rollovers are, in practice, one of the trickiest operational parts of running DNSSEC correctly. Roll a key too abruptly, without overlapping the old and new signatures during the transition window, and caught records signed by the old key can suddenly fail validation everywhere before resolvers catch up turning a routine maintenance task into a domain-wide outage. This operational fragility is a big part of why DNSSEC has a reputation, deserved or not, for being risky to touch once it's live.
 
-</div>
 
-<div class="content-card">
 <span class="section-badge">SECTION 6</span>
 
 ## Following one DNSSEC-validated lookup, step by step
@@ -264,9 +246,7 @@ If, instead, any signature had failed to validate say, an attacker had managed t
 
 This entire process adds a small amount of overhead extra records to fetch, extra signatures to check but it's designed to run largely invisibly. Most people using a DNSSEC validating resolver never notice anything different, except that a specific and dangerous category of attack simply stops working against them.
 
-</div>
 
-<div class="content-card">
 <span class="section-badge">SECTION 7</span>
 
 ## What DNSSEC protects against
@@ -288,9 +268,7 @@ It's worth being concrete about DNSSEC's actual threat model, because vague clai
 
 That's a genuinely important set of protections. Cache poisoning attacks, when they succeed, are almost invisible to victims there's no broken padlock, no obvious warning sign, just a browser quietly connecting to the wrong server while everything looks normal. DNSSEC removes that blind spot at the DNS layer specifically.
 
-</div>
 
-<div class="content-card">
 <span class="section-badge">SECTION 8</span>
 
 ## What DNSSEC doesn't do and why it isn't a complete DNS security strategy
@@ -309,9 +287,7 @@ Here's where a lot of organizations get DNSSEC wrong: they deploy it, check a co
 
 None of this makes DNSSEC less valuable. It makes it a foundation layer control, not a comprehensive one. It closes a specific, serious hole in DNS's original trust model. It was never designed to be and isn't a substitute for domain reputation filtering, threat intelligence, malware detection, or encrypted transport. Organizations that treat DNSSEC as "the DNS security box, checked" and stop there are leaving the much larger and more commonly exploited categories of DNS-layer attack phishing, malware callbacks, lookalike domains completely uncovered. This is exactly why modern protective DNS platforms run DNSSEC validation as table stakes and then layer real time threat intelligence, domain reputation scoring, and behavioral detection on top, because the two categories of protection are complementary, not redundant.
 
-</div>
 
-<div class="content-card">
 <span class="section-badge">SECTION 9</span>
 
 ## Why DNSSEC adoption has been slow
@@ -328,9 +304,7 @@ If DNSSEC closes such a real and dangerous hole, a fair question is why, more th
 
 Even so, adoption has been climbing steadily, particularly among government domains (many of which are mandated to deploy it), financial institutions, and large DNS hosting providers that have made signing effectively automatic for their customers. The trend line is upward, even if the pace has been slower than DNSSEC's original advocates hoped back when the root was first signed.
 
-</div>
 
-<div class="content-card">
 <span class="section-badge">SECTION 10</span>
 
 ## Common DNSSEC myths worth retiring
@@ -344,9 +318,7 @@ A handful of misconceptions about DNSSEC circulate constantly and clearing them 
 - **"If my resolver supports DNSSEC, I'm automatically protected."** Support and validation are different things. A resolver must be actively configured to validate DNSSEC signatures and reject invalid ones supporting the protocol without enforcing validation provides no protection at all.
 - **"DNSSEC failures are rare enough not to worry about."** Misconfigured DNSSEC expired signatures, broken key rollovers, mismatched DS records is one of the more common causes of mysterious, hard-to-diagnose total domain outages precisely because validating resolvers fail closed rather than quietly falling back to insecure resolution.
 
-</div>
 
-<div class="content-card">
 <span class="section-badge">SECTION 11</span>
 
 ## How to check if a domain has DNSSEC and how to deploy it
@@ -363,9 +335,7 @@ Deploying DNSSEC on a domain you control generally comes down to three coordinat
 
 For organizations evaluating whether to deploy DNSSEC on their own domains, the calculus has shifted meaningfully in recent years as major DNS hosting providers have made signing close to automatic. The operational risk that made DNSSEC scary a decade ago manual key management, easy to botch rollovers, has been substantially reduced by tooling. The remaining case against deploying it tends to be inertia rather than genuine technical risk, though the coordination requirement with a registrar still trips up teams that don't test the DS record submission carefully.
 
-</div>
 
-<div class="content-card">
 <span class="section-badge">SECTION 12</span>
 
 ## Where DNSSEC fits in a real DNS security strategy
@@ -387,10 +357,6 @@ The most useful way to think about DNSSEC is as one deliberately narrow layer in
 
 This is exactly the layering that protective DNS platforms are built around. DNSSEC validation is baseline hygiene the resolver should never accept a forged answer. But the attacks security teams deal with day to day are overwhelmingly not forged DNS responses; they're real, validly resolving domains that happen to be malicious, registered fresh, dressed up to look like something trustworthy. Stopping those requires the resolver to be making an active judgment call “should this domain resolve at all, given what we know about it” which is a fundamentally different function than DNSSEC's "is this answer genuine." Because virtually every stage of an attack chain, from a phishing click through malware installation to data exfiltration, touches DNS at some point, a resolver sitting in that path with both cryptographic validation and active threat filtering catches categories of attack that either capability alone would miss.
 
-</div>
-
-<div class="content-card">
-<span class="section-badge">SECTION 13</span>
 
 ## Frequently Asked Questions
 
@@ -474,17 +440,13 @@ This is exactly the layering that protective DNS platforms are built around. DNS
   </div>
 </details>
 
-</div>
-
-<div class="content-card">
-<span class="section-badge">SECTION 14</span>
 
 ## The takeaway
 
-DNSSEC solves a problem that's easy to underestimate precisely because, when it works, nothing visibly happens. There's no padlock icon, no browser warning, no user-facing indicator, most people would recognize just a resolver quietly refusing to be fooled by a forged answer that, without DNSSEC, it would have had absolutely no way to detect. That's the entire point: a defense against an attack category that's otherwise nearly invisible to its victims, closing a hole that's been sitting in DNS's design since 1983.
+DNSSEC is a foundational security layer designed to cryptographically verify the authenticity of DNS records, effectively preventing spoofing and cache poisoning. However, it's not a silver bullet—it doesn't encrypt traffic or block phishing and malware domains. To build a robust DNS security posture, DNSSEC must be combined with encrypted transport (like DoH/DoT) and active threat intelligence. Treat it as the essential groundwork, not the complete solution.
+ As organizations scale, solutions like [OllaDNS](https://olladns.com) provide essential visibility and protection at this layer.
 
-But DNSSEC's precision is also its limit. It was built to answer one narrow question is this DNS data genuinely comes from where it claims to be, and it answers that question extremely well. It was never built to judge whether a domain is safe, whether traffic should stay private, or whether a resolver should refuse to connect somewhere at all. Those are different problems, solved by different layers: encrypted transport for privacy, and active threat intelligence for the phishing pages, malware callbacks, and lookalike domains that make up many real-world DNS-based attacks.
-
-Understood that way, DNSSEC isn't a finish line to check off a compliance list it's the foundation everything else in a serious DNS security posture gets built on top of. Get the foundation right, then build up from there.
-
+<div class="post-footer" style="margin-top: 3rem; margin-bottom: 1rem; border-top: none; padding-top: 0; text-align: center;">
+  <a class="btn" href="https://olladns.com">Learn more about OllaDNS →</a>
+</div>
 </div>

@@ -6,25 +6,37 @@ author: "olladns Security Team"
 tags: ["Guide"]
 ---
 
-TL;DR
 
-### DNS Over HTTPS in 60 Seconds
+<div class="content-card">
+  <div class="premium-card-header">
+    <span class="card-badge">TL;DR</span>
+    <h3>DNS Over HTTPS in 60 Seconds</h3>
+  </div>
 
-*   ✓ DNS Over HTTPS wraps DNS queries inside HTTPS traffic, encrypting them so ISPs and network eavesdroppers can't see which domains you're visiting. It's gradually becoming standard on modern devices and browsers, backed by major companies like Apple, Mozilla, and Google—but adoption remains patchy due to organizational complexity, deployment friction, and legitimate tension between privacy and network security monitoring. This guide breaks down exactly what DoH does (stops ISP-level surveillance of DNS queries), what it doesn't (protect against malicious resolvers or malware), how it differs from DoT and DoQ, real deployment challenges in organizations, and why "just encrypt everything" is more complicated in the DNS world than it initially sounds.
+  <p class="tldr-paragraph">DNS Over HTTPS wraps DNS queries inside HTTPS traffic, encrypting them so ISPs and network eavesdroppers can't see which domains you're visiting. It's gradually becoming standard on modern devices and browsers, backed by major companies like Apple, Mozilla, and Google—but adoption remains patchy due to organizational complexity, deployment friction, and legitimate tension between privacy and network security monitoring. This guide breaks down exactly what DoH does (stops ISP-level surveillance of DNS queries), what it doesn't (protect against malicious resolvers or malware), how it differs from DoT and DoQ, real deployment challenges in organizations, and why "just encrypt everything" is more complicated in the DNS world than it initially sounds.</p>
+</div>
 
-Key Takeaways
 
-### What You'll Learn
 
-*   **DNS Over HTTPS (DoH):** Encrypts DNS queries inside HTTPS to improve DNS privacy.
-*   **DNS Privacy & ISP Surveillance:** Prevents ISPs and network eavesdroppers from directly seeing your DNS queries.
-*   **DoH vs DoT vs DoQ:** Understand the key differences between the three encrypted DNS protocols.
-*   **DoH Security & Limitations:** Protects DNS traffic in transit but doesn't prevent malware, malicious resolvers, endpoint compromise, or all traffic analysis.
-*   **DoH Deployment & Secure DNS:** Choose trusted resolvers and consider organizational filtering, monitoring, MDM, and security requirements.
+<div class="content-card">
+  <div class="premium-card-header">
+    <span class="card-badge">KEY TAKEAWAYS</span>
+    <h3>What You'll Learn</h3>
+  </div>
 
-01
+<ul class="grid-list">
+  <li><span><strong>DNS Over HTTPS (DoH):</strong> Encrypts DNS queries inside HTTPS to improve DNS privacy.</span></li>
+  <li><span><strong>DNS Privacy & ISP Surveillance:</strong> Prevents ISPs and network eavesdroppers from directly seeing your DNS queries.</span></li>
+  <li><span><strong>DoH vs DoT vs DoQ:</strong> Understand the key differences between the three encrypted DNS protocols.</span></li>
+  <li><span><strong>DoH Security & Limitations:</strong> Protects DNS traffic in transit but doesn't prevent malware, malicious resolvers, endpoint compromise, or all traffic analysis.</span></li>
+  <li><span><strong>DoH Deployment & Secure DNS:</strong> Choose trusted resolvers and consider organizational filtering, monitoring, MDM, and security requirements.</span></li>
+</ul>
 
-## DNS Over HTTPS (DoH): The Protocol That's Quietly Solving One of DNS's Oldest Problems
+</div>
+
+<div class="content-card">
+
+## DNS Over HTTPS (DoH): The Protocol That's Quietly Solving One of DNS's Oldest Problems As organizations scale, solutions like [OllaDNS](https://olladns.com) provide essential visibility and protection at this layer.
 
 > Imagine if every time you typed a web address into your browser, someone was standing outside your window watching you do it. They couldn't see what you were reading once the page loaded—your browser's encryption handled that—but they could see every single domain name you requested.
 
@@ -360,3 +372,8 @@ The goal is no longer to stop DNS encryption—it is to manage it.
 [See olladns Protective DNS](https://olladns.com/product.html)
 
 [← DNS Filtering Explained](/blog/dns-filtering-explained/) [DNS Firewall Explained →](/blog/dns-firewall-explained-how-dns-firewalls-protect-networks/)
+
+<div class="post-footer" style="margin-top: 3rem; margin-bottom: 1rem; border-top: none; padding-top: 0; text-align: center;">
+  <a class="btn" href="https://olladns.com">Learn more about OllaDNS →</a>
+</div>
+</div>

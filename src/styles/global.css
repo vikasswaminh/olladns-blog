@@ -7,7 +7,7 @@
   --muted: #667085;
   --radius: 14px;
   --maxw: 46rem;
-  --wide: 64rem;
+  --wide: 90rem;
   --font: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 }
@@ -370,31 +370,56 @@ main.container {
 .toc-container {
   position: sticky;
   top: 90px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-top: 4px solid var(--accent);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  padding: 1.5rem;
   margin: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  .toc-container {
-    background: var(--bg-soft);
-  }
+.toc-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: var(--accent);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+  letter-spacing: 0.05em;
+  border: none;
 }
 
-.toc-title {
-  font-size: .85rem;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  font-weight: 700;
-  margin-top: 0;
-  margin-bottom: 1rem;
+.toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-left: 3px solid color-mix(in srgb, var(--accent) 15%, var(--border));
+}
+
+.toc li {
+  margin: 0;
+}
+
+.toc a {
+  display: block;
+  padding: 0.5rem 1rem;
   color: var(--muted);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: .75rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  border-left: 3px solid transparent;
+  margin-left: -3px;
+  transition: all 0.2s ease;
+}
+
+.toc a:hover {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background-color: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+
+.toc-item.depth-3 a {
+  padding-left: 2rem;
+  font-size: 0.85rem;
 }
 
 .docs-toc {
@@ -515,18 +540,16 @@ main.container {
   color: var(--accent);
   border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
   box-shadow: 0 2px 4px rgba(249, 115, 22, 0.05);
-  margin-bottom: -1.5rem;
-  position: relative;
-  top: -1.25rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1.5rem;
 }
 
 
 .content-card h2 {
   font-size: 1.7rem;
   letter-spacing: -.01em;
-  margin-top: 0;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .prose h3 {
@@ -2844,6 +2867,9 @@ body {
 .recent-posts-sidebar {
   position: sticky;
   top: 90px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-right: 10px; /* for scrollbar */
 }
 
 .recent-posts-title {

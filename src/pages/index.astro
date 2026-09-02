@@ -44,8 +44,6 @@ const rest = posts.slice(1);
             <h2 class="super-featured-title">{featured.data.title}</h2>
             <p class="super-featured-desc">{featured.data.description}</p>
             <div class="super-featured-meta">
-              <span>{readingTime(featured.body)}</span>
-              <span class="meta-dot">•</span>
               <FormattedDate date={featured.data.pubDate || new Date()} />
               <span class="meta-dot">•</span>
               <span class="read-more-link">Read article <span class="arrow">→</span></span>
@@ -58,16 +56,16 @@ const rest = posts.slice(1);
         <div class="super-article-list">
           {rest.map((p) => (
             <article class="super-article-card-vertical">
-               <div class="super-article-content">
-                  <span class="badge-accent mb-2" style="font-size: 0.65rem; padding: 0.25rem 0.6rem; align-self: flex-start;">{p.data.tags[0] || 'Article'}</span>
-                  <h3 class="super-article-title"><a href={`/${p.slug}/`}>{p.data.title}</a></h3>
-                  <p class="super-article-desc">{p.data.description}</p>
-                  <div class="super-featured-meta" style="margin-top: auto;">
-                    <span>{readingTime(p.body)}</span>
-                    <span class="meta-dot">•</span>
-                    <FormattedDate date={p.data.pubDate || new Date()} />
-                  </div>
-               </div>
+               <a href={`/${p.slug}/`} style="text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%;">
+                 <div class="super-article-content" style="flex: 1; display: flex; flex-direction: column;">
+                    <span class="badge-accent mb-2" style="font-size: 0.65rem; padding: 0.25rem 0.6rem; align-self: flex-start;">{p.data.tags[0] || 'Article'}</span>
+                    <h3 class="super-article-title">{p.data.title}</h3>
+                    <p class="super-article-desc">{p.data.description}</p>
+                    <div class="super-featured-meta" style="margin-top: auto;">
+                      <FormattedDate date={p.data.pubDate || new Date()} />
+                    </div>
+                 </div>
+               </a>
             </article>
           ))}
         </div>
