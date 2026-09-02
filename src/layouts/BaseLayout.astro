@@ -15,8 +15,9 @@ interface Props {
     author?: string;
     tags?: string[];
   };
+  wide?: boolean;
 }
-const { title = SITE.title, description, image, article } = Astro.props;
+const { title = SITE.title, description, image, article, wide = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -26,7 +27,7 @@ const { title = SITE.title, description, image, article } = Astro.props;
   </head>
   <body>
     <Header />
-    <main class="container">
+    <main class="container" style={wide ? 'max-width: 100%; padding: 0;' : undefined}>
       <slot />
     </main>
     <Footer />

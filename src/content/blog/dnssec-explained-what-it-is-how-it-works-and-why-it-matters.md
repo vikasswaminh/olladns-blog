@@ -103,19 +103,28 @@ tags: ['Guide', 'DNSSEC', 'DNS security']
 
 ## The trust problem nobody designed DNS to solve
 
-<p class="lead-text">When DNS was built in the early 1980s, the internet was a small, trusting community of research institutions. Nobody was trying to trick anybody. If a DNS server said, "this domain lives at this IP address," every other machine simply believed it.</p>
-
-<blockquote class="premium-quote">
-  "There was no signature, no verification, no way to check. The protocol assumed good faith because, at the time, good faith was a safe assumption. That assumption aged badly."
-</blockquote>
-
-The cracks started showing early. DNS responses travel over UDP, a lightweight, connectionless protocol with no built-in authentication. A resolver sends a query and waits for a reply that matches a few identifying fields, mostly a 16-bit transaction ID and the source port. If an attacker can guess or brute-force those values and get a forged answer back to the resolver before the real one arrives, the resolver has no way to tell the difference. It just accepts the first plausible looking response and moves on. That is the entire mechanism behind DNS cache poisoning, and for a protocol carrying this much of the internet's trust, a 16-bit guessing game is an alarmingly thin wall.
-
-For years, this was treated as a theoretical weakness real, but hard enough to exploit that it stayed mostly academic. Then, in 2008, a security researcher named Dan Kaminsky found a way to make the attack devastatingly practical. Instead of trying to poison one record at a time, Kaminsky's technique flooded a resolver with queries for nonexistent subdomains, then raced to inject forged responses fast enough to win the guessing game repeatedly, poisoning entire zones rather than single records. It turned an obscure risk into something that could be weaponized against real infrastructure, at scale, by attackers who weren't even especially sophisticated.
-
-The disclosure triggered one of the most coordinated emergency patches in internet history vendors quietly fixed resolvers before the technical details went public, but it also made something uncomfortably clear: patching the symptoms wasn't enough. DNS itself had no concept of authenticity. Nothing in the protocol let a resolver prove an answer was real. You could make forgery harder, randomize ports, add entropy, but you couldn't make it impossible, because the underlying design simply had no notion of "proof."
-
-That's the gap DNSSEC exists to close. Not "make forgery harder to pull off," but "make forgery mathematically detectable, every time, regardless of how convincing the fake answer looks."
+<div class="numbered-grid">
+  <div class="numbered-card">
+    <div class="numbered-card-number">01</div>
+    <div class="numbered-card-title">The Early Internet</div>
+    <div class="numbered-card-desc">When DNS was built in the early 1980s, the internet was a trusting community. The protocol assumed good faith, with no signatures or verification. If a DNS server said, "this domain lives at this IP address," every other machine simply believed it.</div>
+  </div>
+  <div class="numbered-card">
+    <div class="numbered-card-number">02</div>
+    <div class="numbered-card-title">The UDP Vulnerability</div>
+    <div class="numbered-card-desc">DNS travels over UDP with no built-in authentication. Attackers can guess 16-bit transaction IDs to inject forged answers before the real one arrives. This 16-bit guessing game is an alarmingly thin wall carrying the internet's trust.</div>
+  </div>
+  <div class="numbered-card">
+    <div class="numbered-card-number">03</div>
+    <div class="numbered-card-title">Kaminsky Attack (2008)</div>
+    <div class="numbered-card-desc">Dan Kaminsky made cache poisoning devastatingly practical by flooding resolvers with queries for nonexistent subdomains, poisoning entire zones at scale. It turned an obscure risk into something that could be weaponized.</div>
+  </div>
+  <div class="numbered-card">
+    <div class="numbered-card-number">04</div>
+    <div class="numbered-card-title">The Missing Concept</div>
+    <div class="numbered-card-desc">Patching symptoms wasn't enough because DNS had no concept of authenticity. This drove the need for DNSSEC: to make forgery mathematically detectable, every time, regardless of how convincing the fake answer looks.</div>
+  </div>
+</div>
 
 </div>
 
@@ -124,16 +133,22 @@ That's the gap DNSSEC exists to close. Not "make forgery harder to pull off," bu
 
 ## What is DNSSEC?
 
-DNSSEC the Domain Name Security Extensions is a suite of extensions to standard DNS that adds cryptographic signatures to DNS data. Every time a signed zone answers a query, it doesn't just hand back a record; it hands back the record along with a digital signature proving that the record came from the legitimate holder of that zone's private key and hasn't been altered since it was signed.
+<p>DNSSEC the Domain Name Security Extensions is a suite of extensions to standard DNS that adds cryptographic signatures to DNS data. Every time a signed zone answers a query, it doesn’t just hand back a record; it hands back the record along with a digital signature proving that the record came from the legitimate holder of that zone’s private key and hasn’t been altered since it was signed.</p>
 
-It helps to be precise about what that sentence promises, because DNSSEC is one of the most misunderstood acronyms in networking. <div class="comparison-grid">
-  <div class="comparison-card accent">
-    <h4>Authenticity & Integrity</h4>
-    <p>DNSSEC guarantees that an answer really came from the domain's authoritative source, and that nobody tampered with it along the way. This is its entire purpose.</p>
+It helps to be precise about what that sentence promises, because DNSSEC is one of the most misunderstood acronyms in networking. <div class="split-feature-panel">
+  <div class="split-panel-half accent-side">
+    <div class="split-panel-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.286-3m5.286 3l-5.286 3-5.286-3V7l5.286-3 5.286 3v5z"></path></svg>
+    </div>
+    <div class="split-panel-title">Authenticity & Integrity</div>
+    <div class="split-panel-desc">DNSSEC guarantees that an answer really came from the domain's authoritative source, and that nobody tampered with it along the way. This is its entire purpose.</div>
   </div>
-  <div class="comparison-card neutral">
-    <h4>Confidentiality</h4>
-    <p>DNSSEC does <strong>not</strong> guarantee confidentiality. Anyone watching the network can still see which domains are being looked up, because nothing about DNSSEC involves encryption.</p>
+  <div class="split-panel-half neutral-side">
+    <div class="split-panel-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+    </div>
+    <div class="split-panel-title">Confidentiality</div>
+    <div class="split-panel-desc">DNSSEC does <strong>not</strong> guarantee confidentiality. Anyone watching the network can still see which domains are being looked up, because nothing about DNSSEC involves encryption.</div>
   </div>
 </div> That distinction trips up a lot of people who assume "adds security" automatically means "adds privacy." DNSSEC and encrypted DNS (DoH, DoT, DoQ) solve two completely different problems, and one does not substitute for the other.
 

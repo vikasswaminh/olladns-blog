@@ -8,27 +8,31 @@ interface Props {
   pubDate: Date;
   tags?: string[];
   minutes?: number;
+  thumbnailUrl?: string;
 }
-const { url, title, description, pubDate, tags = [], minutes } = Astro.props;
+const { url, title, description, pubDate, tags = [], minutes, thumbnailUrl } = Astro.props;
+
+// Fallback image if none provided
+const image = thumbnailUrl || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80';
 ---
 
-<article class="post-card">
-  <h2 class="post-card-title"><a href={url}>{title}</a></h2>
-  <p class="post-card-meta">
-    <FormattedDate date={pubDate} />
-    {minutes ? <span aria-hidden="true">·</span> : null}
-    {minutes ? <span>{minutes} min read</span> : null}
-  </p>
-  <p class="post-card-desc">{description}</p>
-  {
-    tags.length > 0 && (
-      <p class="post-card-tags">
-        {tags.map((t) => (
-          <a class="tag" href={`/tags/${t}/`}>
-            #{t}
-          </a>
-        ))}
-      </p>
-    )
-  }
+<article class="post-card-new" data-title={title} data-desc={description} data-tags={tags.join(',')}>
+  <a href={url}>
+    <img src={image} alt={title} class="post-card-image" />
+  </a>
+  <div class="post-card-content">
+    {tags.length > 0 && (
+      <span class="post-card-category">{tags[0]}</span>
+    )}
+    <h2 class="post-card-title-new"><a href={url}>{title}</a></h2>
+    <p class="post-card-desc-new">{description}</p>
+    
+    <div class="post-card-footer">
+      <div class="post-card-meta-new">
+        <FormattedDate date={pubDate} />
+        {minutes && <span>• {minutes} min read</span>}
+      </div>
+      <a href={url} class="post-card-readmore">Read →</a>
+    </div>
+  </div>
 </article>

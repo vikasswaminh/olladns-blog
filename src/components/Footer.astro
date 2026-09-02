@@ -1,17 +1,49 @@
 ---
 import { SITE } from '../config';
-const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <p>© {year} {SITE.brand}. All rights reserved.</p>
-    <p class="footer-links">
-      <a href={SITE.marketingUrl}>{SITE.marketingLabel}</a>
-      <span aria-hidden="true">·</span>
-      <a href="/rss.xml">RSS</a>
-      <span aria-hidden="true">·</span>
-      <a href="/tags/">Tags</a>
-    </p>
+<footer class="docs-footer">
+  <div class="docs-footer-inner">
+    <div class="docs-footer-grid">
+      <div class="docs-footer-brand-col">
+        <h3 class="docs-footer-brand">OllaDNS Blog</h3>
+        <p class="docs-footer-desc">Technical insights for the modern internet.</p>
+      </div>
+
+      <div class="docs-footer-col">
+        <h4>BLOG</h4>
+        <ul>
+          <li><a href="/">Latest Articles</a></li>
+          <li><a href="/tags">Categories</a></li>
+          <li><a href="/tags">Tags</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+
+      <div class="docs-footer-col">
+        <h4>TOPICS</h4>
+        <ul>
+          <li><a href="/tags/dns">DNS</a></li>
+          <li><a href="/tags/dnssec">DNSSEC</a></li>
+          <li><a href="/tags/networking">Networking</a></li>
+          <li><a href="/tags/security">Security</a></li>
+          <li><a href="/tags/cloud">Cloud</a></li>
+        </ul>
+      </div>
+
+      <div class="docs-footer-col">
+        <h4>OLLADNS</h4>
+        <ul>
+          <li><a href={SITE.url}>Main Website</a></li>
+          <li><a href={`${SITE.url}/products`}>Products</a></li>
+          <li><a href={`${SITE.url}/resources`}>Resources</a></li>
+          <li><a href={`${SITE.url}/contact`}>Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="docs-footer-bottom">
+      &copy; {new Date().getFullYear()} OllaDNS. All rights reserved.
+    </div>
   </div>
 </footer>

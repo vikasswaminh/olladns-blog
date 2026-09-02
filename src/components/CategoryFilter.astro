@@ -1,0 +1,13 @@
+---
+interface Props {
+  tags: string[];
+}
+const { tags } = Astro.props;
+---
+
+<div class="category-filter" id="categoryFilter">
+  <a href="/" class="category-btn active" data-tag="all">All Articles</a>
+  {tags.map((tag) => (
+    <a href={`/tags/${tag}/`} class="category-btn" data-tag={tag}>{tag}</a>
+  ))}
+</div>

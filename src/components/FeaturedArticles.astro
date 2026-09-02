@@ -1,0 +1,54 @@
+---
+import FormattedDate from './FormattedDate.astro';
+import { readingTime } from '../utils/posts';
+
+interface Props {
+  mainPost: any;
+  sidePosts: any[];
+}
+
+const { mainPost, sidePosts } = Astro.props;
+
+function getThumbnailUrl(post: any) {
+  // If your frontmatter has an image/cover field, use it here.
+  // Fallback to a placeholder image or patterned background.
+  return post.data.cover || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80';
+}
+---
+
+<div class="featured-section">
+  {mainPost && (
+    <div class="featured-main">
+      <a href={`/blog/${mainPost.slug}/`} style="display: block; width: 100%; height: 100%;">
+        <img src={getThumbnailUrl(mainPost)} alt={mainPost.data.title} />
+        <div class="featured-main-overlay">
+          {mainPost.data.tags && mainPost.data.tags[0] && (
+            <span class="featured-main-category">{mainPost.data.tags[0]}</span>
+          )}
+          <h2 class="featured-main-title">{mainPost.data.title}</h2>
+          <div class="featured-main-meta">
+            <FormattedDate date={mainPost.data.pubDate} /> • {readingTime(mainPost.body)} min read
+          </div>
+        </div>
+      </a>
+    </div>
+  )}
+
+  <div class="featured-side">
+    {sidePosts.map((post) => (
+      <div class="featured-side-card">
+        <a href={`/blog/${post.slug}/`}>
+          <img class="featured-side-img" src={getThumbnailUrl(post)} alt={post.data.title} />
+        </a>
+        <div class="featured-side-content">
+          <h3 class="featured-side-title">
+            <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+          </h3>
+          <div class="post-card-meta-new">
+            <FormattedDate date={post.data.pubDate} />
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
