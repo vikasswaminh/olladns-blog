@@ -5,7 +5,7 @@ import { SITE } from './src/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://blog.olladns.com',
+  site: 'https://blogs.olladns.com',
   trailingSlash: 'ignore',
   integrations: [sitemap()],
   markdown: {
