@@ -4,7 +4,10 @@ import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import { SITE } from '../config';
-import { readingTime } from '../utils/posts';
+import { readingTime, getPublishedPosts } from '../utils/posts';
+
+const allPosts = await getPublishedPosts();
+const recentPosts = allPosts.filter(p => p.slug !== Astro.props.post?.slug).slice(0, 5);
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -69,6 +72,16 @@ const jsonLd = {
       <div class="prose">
         <slot />
       </div>
+      <aside class="recent-posts-sidebar">
+        <h3 class="recent-posts-title">RECENT POSTS</h3>
+        <div class="recent-posts-list">
+          {recentPosts.map(p => (
+            <a href={`/${p.slug}/`} class="recent-post-card">
+              <h4>{p.data.title}</h4>
+            </a>
+          ))}
+        </div>
+      </aside>
     </div>
 
     <footer class="post-footer">
