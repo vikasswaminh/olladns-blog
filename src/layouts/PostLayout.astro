@@ -13,7 +13,7 @@ interface Props {
 const { post, headings } = Astro.props;
 const { title, description, pubDate, updatedDate, author, tags, cover } = post.data;
 const minutes = readingTime(post.body);
-const canonical = new URL(`/blog/${post.slug}/`, Astro.site).href;
+const canonical = new URL(`/${post.slug}/`, Astro.site).href;
 
 const jsonLd = {
   '@context': 'https://schema.org',

@@ -20,7 +20,7 @@ const rest = posts.slice(1);
       <ul class="sidebar-post-list">
         {posts.map((p) => (
           <li>
-            <a href={`/blog/${p.slug}/`}>{p.data.title}</a>
+            <a href={`/${p.slug}/`}>{p.data.title}</a>
           </li>
         ))}
       </ul>
@@ -35,7 +35,7 @@ const rest = posts.slice(1);
       </div>
 
       {featured && (
-        <a href={`/blog/${featured.slug}/`} class="super-featured-card">
+        <a href={`/${featured.slug}/`} class="super-featured-card">
           <div class="super-featured-image">
             <img src={featured.data.image?.url || "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80"} alt={featured.data.title} />
           </div>
@@ -60,7 +60,7 @@ const rest = posts.slice(1);
             <article class="super-article-card-vertical">
                <div class="super-article-content">
                   <span class="badge-accent mb-2" style="font-size: 0.65rem; padding: 0.25rem 0.6rem; align-self: flex-start;">{p.data.tags[0] || 'Article'}</span>
-                  <h3 class="super-article-title"><a href={`/blog/${p.slug}/`}>{p.data.title}</a></h3>
+                  <h3 class="super-article-title"><a href={`/${p.slug}/`}>{p.data.title}</a></h3>
                   <p class="super-article-desc">{p.data.description}</p>
                   <div class="super-featured-meta" style="margin-top: auto;">
                     <span>{readingTime(p.body)}</span>

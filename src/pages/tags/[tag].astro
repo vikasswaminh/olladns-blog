@@ -23,7 +23,7 @@ const { posts, tag } = Astro.props;
     {
       posts.map((p) => (
         <PostCard
-          url={`/blog/${p.slug}/`}
+          url={`/${p.slug}/`}
           title={p.data.title}
           description={p.data.description}
           pubDate={p.data.pubDate}
