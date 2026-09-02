@@ -1,17 +1,106 @@
 ---
-// Redirecting instantly to /blog
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts, readingTime } from '../../utils/posts';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+const posts = await getPublishedPosts();
+const featured = posts[0];
+const rest = posts.slice(1);
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0;url=/blog" />
-    <title>Redirecting to Blog...</title>
-    <script>
-        window.location.replace("/blog");
-    </script>
-</head>
-<body>
-    <p>Redirecting to <a href="/blog">the blog</a>...</p>
-</body>
-</html>
+
+<BaseLayout title="Blog - Networking & Cloud Security" wide={true}>
+  
+  <div class="super-blog-layout container">
+    
+    <!-- Left Sidebar: All Blog Posts -->
+    <aside class="super-sidebar">
+      <div class="sidebar-header" style="margin-bottom: 0.5rem; display: flex; align-items: center; height: 32px;">
+        <span class="badge-accent">ALL BLOG POSTS</span>
+      </div>
+      <ul class="sidebar-post-list">
+        {posts.map((p) => (
+          <li>
+            <a href={`/blog/${p.slug}/`}>{p.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="super-main-content">
+
+      <div class="sidebar-header" style="margin-bottom: 0.5rem; display: flex; align-items: center; height: 32px; gap: 1rem;">
+        <span class="badge-accent">NEWEST ARTICLES</span>
+        <span class="super-divider-text">Latest from our experts</span>
+      </div>
+
+      {featured && (
+        <a href={`/blog/${featured.slug}/`} class="super-featured-card">
+          <div class="super-featured-image">
+            <img src={featured.data.image?.url || "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80"} alt={featured.data.title} />
+          </div>
+          <div class="super-featured-content">
+            <span class="badge-premium badge-orange mb-3" style="align-self: flex-start;">{featured.data.tags[0] || 'AI WORKFORCE'}</span>
+            <h2 class="super-featured-title">{featured.data.title}</h2>
+            <p class="super-featured-desc">{featured.data.description}</p>
+            <div class="super-featured-meta">
+              <span>{readingTime(featured.body)}</span>
+              <span class="meta-dot">•</span>
+              <FormattedDate date={featured.data.pubDate || new Date()} />
+              <span class="meta-dot">•</span>
+              <span class="read-more-link">Read article <span class="arrow">→</span></span>
+            </div>
+          </div>
+        </a>
+      )}
+
+      {rest.length > 0 && (
+        <div class="super-article-list">
+          {rest.map((p) => (
+            <article class="super-article-card-vertical">
+               <div class="super-article-content">
+                  <span class="badge-accent mb-2" style="font-size: 0.65rem; padding: 0.25rem 0.6rem; align-self: flex-start;">{p.data.tags[0] || 'Article'}</span>
+                  <h3 class="super-article-title"><a href={`/blog/${p.slug}/`}>{p.data.title}</a></h3>
+                  <p class="super-article-desc">{p.data.description}</p>
+                  <div class="super-featured-meta" style="margin-top: auto;">
+                    <span>{readingTime(p.body)}</span>
+                    <span class="meta-dot">•</span>
+                    <FormattedDate date={p.data.pubDate || new Date()} />
+                  </div>
+               </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="super-sidebar">
+      <div class="sidebar-header" style="margin-bottom: 1.5rem; display: flex; align-items: center; height: 32px;">
+        <span class="badge-accent">OLLADNS</span>
+      </div>
+      <ul class="sidebar-links-list">
+        <li>
+          <a href="#">Return to the main OllaDNS homepage to see everything.</a>
+        </li>
+        <li>
+          <a href="#">Explore the autonomous platform that powers AI work.</a>
+        </li>
+        <li>
+          <a href="#">Meet your new AI employee workforce and see them in action.</a>
+        </li>
+        <li>
+          <a href="#">Discover industry-specific solutions tailored for your business.</a>
+        </li>
+        <li>
+          <a href="#">Read our comprehensive guides and educational resources.</a>
+        </li>
+        <li>
+          <a href="#">Follow the OllaDNS blog for the latest insights and news.</a>
+        </li>
+      </ul>
+    </aside>
+
+  </div>
+</BaseLayout>
+
