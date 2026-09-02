@@ -13,5 +13,9 @@ export default defineConfig({
   },
   devToolbar: {
     enabled: false
+  },
+  redirects: {
+    '/blog': '/',
+    '/blog/[...slug]': '/[...slug]'
   }
 });
