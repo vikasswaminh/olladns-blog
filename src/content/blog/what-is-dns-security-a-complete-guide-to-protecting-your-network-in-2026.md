@@ -1,7 +1,7 @@
 ---
 title: "What Is DNS Security? A Complete Guide to Protecting Your Network in 2026"
 description: "DNS is the layer every attacker must touch and almost nobody watches. Here's what DNS security means, how attacks exploit it, and how to close the gap — without slowing your team down."
-pubDate: 2026-08-19T00:00:00.000Z
+pubDate: 2026-09-01T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Guide"]
 ---

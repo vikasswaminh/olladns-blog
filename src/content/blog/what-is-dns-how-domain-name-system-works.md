@@ -1,7 +1,7 @@
 ---
 title: "What Is DNS? How the Domain Name System Works"
 description: "DNS is the internet's address book — it turns human-friendly names into the numeric IP addresses computers use to find each other. Here's how it works, step by step, and why it's also one of the most underrated security layers on the internet."
-pubDate: 2026-08-21T00:00:00.000Z
+pubDate: 2026-08-27T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Guide"]
 ---

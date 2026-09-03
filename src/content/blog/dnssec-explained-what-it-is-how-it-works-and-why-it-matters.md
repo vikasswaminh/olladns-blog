@@ -1,7 +1,7 @@
 ---
 title: "DNSSEC Explained: What It Is, How It Works, and Why It Matters"
 description: "A comprehensive guide to understanding Domain Name System Security Extensions (DNSSEC), how the chain of trust works, and why it is essential for modern cybersecurity."
-pubDate: 2026-08-31
+pubDate: 2026-08-25T00:00:00.000Z
 author: 'OllaDNS Security Team'
 tags: ['Guide', 'DNSSEC', 'DNS security']
 ---

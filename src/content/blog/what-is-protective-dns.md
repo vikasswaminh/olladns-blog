@@ -1,7 +1,7 @@
 ---
 title: "What Is Protective DNS? How It Blocks Cyber Threats at the Resolver"
 description: "A comprehensive guide to how Protective DNS works, what it blocks, and how to deploy it effectively."
-pubDate: 2026-09-03T00:00:00.000Z
+pubDate: 2026-09-02T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Guide"]
 ---

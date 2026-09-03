@@ -1,7 +1,7 @@
 ---
 title: "DNS Firewall Explained: How DNS Firewalls Protect Networks"
 description: "A DNS firewall stops threats before a single packet reaches your network. Here's exactly how DNS firewalls work, what they block, and how to deploy one without slowing your team down."
-pubDate: 2026-08-24T00:00:00.000Z
+pubDate: 2026-08-21T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Guide"]
 ---

@@ -1,7 +1,7 @@
 ---
 title: "DNS Over HTTPS (DoH): Complete Guide to Secure DNS"
 description: "DNS Over HTTPS encrypts DNS queries so ISPs and network operators can't see your domain lookups. Learn how DoH works, why it matters, deployment challenges, and how it compares to DoT and DoQ."
-pubDate: 2026-08-26T00:00:00.000Z
+pubDate: 2026-08-24T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Guide"]
 ---
