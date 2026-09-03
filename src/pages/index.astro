@@ -37,7 +37,7 @@ const rest = posts.slice(1);
       {featured && (
         <a href={`/${featured.slug}/`} class="super-featured-card">
           <div class="super-featured-image">
-            <img src={featured.data.image?.url || "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80"} alt={featured.data.title} />
+            <img src={featured.data.image?.url || "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&fm=webp&w=900"} alt={featured.data.title} width="900" height="506" fetchpriority="high" decoding="async" />
           </div>
           <div class="super-featured-content">
             <span class="badge-premium badge-orange mb-3" style="align-self: flex-start;">{featured.data.tags[0] || 'AI WORKFORCE'}</span>

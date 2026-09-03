@@ -12,7 +12,7 @@ const { mainPost, sidePosts } = Astro.props;
 function getThumbnailUrl(post: any) {
   // If your frontmatter has an image/cover field, use it here.
   // Fallback to a placeholder image or patterned background.
-  return post.data.cover || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80';
+  return post.data.cover || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80&fm=webp';
 }
 ---
 
@@ -20,7 +20,7 @@ function getThumbnailUrl(post: any) {
   {mainPost && (
     <div class="featured-main">
       <a href={`/${mainPost.slug}/`} style="display: block; width: 100%; height: 100%;">
-        <img src={getThumbnailUrl(mainPost)} alt={mainPost.data.title} />
+        <img src={getThumbnailUrl(mainPost)} alt={mainPost.data.title} width="800" height="450" fetchpriority="high" decoding="async" />
         <div class="featured-main-overlay">
           {mainPost.data.tags && mainPost.data.tags[0] && (
             <span class="featured-main-category">{mainPost.data.tags[0]}</span>
@@ -38,7 +38,7 @@ function getThumbnailUrl(post: any) {
     {sidePosts.map((post) => (
       <div class="featured-side-card">
         <a href={`/${post.slug}/`}>
-          <img class="featured-side-img" src={getThumbnailUrl(post)} alt={post.data.title} />
+          <img class="featured-side-img" src={getThumbnailUrl(post)} alt={post.data.title} width="400" height="225" loading="lazy" decoding="async" />
         </a>
         <div class="featured-side-content">
           <h3 class="featured-side-title">

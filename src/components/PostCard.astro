@@ -13,12 +13,12 @@ interface Props {
 const { url, title, description, pubDate, tags = [], minutes, thumbnailUrl } = Astro.props;
 
 // Fallback image if none provided
-const image = thumbnailUrl || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80';
+const image = thumbnailUrl || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80&fm=webp';
 ---
 
 <article class="post-card-new" data-title={title} data-desc={description} data-tags={tags.join(',')}>
   <a href={url}>
-    <img src={image} alt={title} class="post-card-image" />
+    <img src={image} alt={title} class="post-card-image" width="600" height="340" loading="lazy" decoding="async" />
   </a>
   <div class="post-card-content">
     {tags.length > 0 && (
