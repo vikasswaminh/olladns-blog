@@ -2,12 +2,12 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import TableOfContents from '../components/TableOfContents.astro';
 import { SITE } from '../config';
 import { readingTime, getPublishedPosts } from '../utils/posts';
 
 const allPosts = await getPublishedPosts();
-const recentPosts = allPosts.filter(p => p.slug !== Astro.props.post?.slug).slice(0, 5);
+const otherPosts = allPosts.filter(p => p.slug !== Astro.props.post?.slug);
+
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -66,24 +66,136 @@ const jsonLd = {
       }
     </header>
     {cover && <img class="post-cover" src={cover} alt="" loading="lazy" />}
-    
+
     <div class="post-content-layout">
-      {headings && headings.length > 0 && <TableOfContents headings={headings} />}
-      <div class="prose">
-        <slot />
-      </div>
-      <aside class="recent-posts-sidebar">
-        <h3 class="recent-posts-title">RECENT POSTS</h3>
-        <div class="recent-posts-list">
-          {recentPosts.map(p => (
-            <a href={`/${p.slug}/`} class="recent-post-card">
+
+      <!-- Left Sidebar: All Blog Posts -->
+      <aside class="left-navigation-sidebar">
+        <p class="sidebar-label">ALL BLOG POSTS</p>
+        <div class="sidebar-card-list">
+          {otherPosts.map((p) => (
+            <a href={`/${p.slug}/`} class="sidebar-card">
               <h4>{p.data.title}</h4>
             </a>
           ))}
         </div>
       </aside>
+
+      <!-- Center: Main Article -->
+      <div class="prose">
+        <slot />
+      </div>
+
+      <!-- Right Sidebar: OllaDNS Navigation Links -->
+      <aside class="right-navigation-sidebar">
+        <p class="sidebar-label">OLLADNS</p>
+        <div class="sidebar-card-list">
+          <a href="https://olladns.com" class="sidebar-card sidebar-card--link">
+            <h4>OllaDNS Homepage</h4>
+            <p class="sidebar-card-desc">Explore the OllaDNS platform and products</p>
+          </a>
+          <a href="https://olladns.com/products" class="sidebar-card sidebar-card--link">
+            <h4>Protective DNS Platform</h4>
+            <p class="sidebar-card-desc">Block threats at the DNS resolver level</p>
+          </a>
+          <a href="https://olladns.com/solutions" class="sidebar-card sidebar-card--link">
+            <h4>Industry Solutions</h4>
+            <p class="sidebar-card-desc">Tailored DNS security for every sector</p>
+          </a>
+          <a href="https://olladns.com/pricing" class="sidebar-card sidebar-card--link">
+            <h4>Plans &amp; Pricing</h4>
+            <p class="sidebar-card-desc">Find the right plan for your organisation</p>
+          </a>
+          <a href="https://olladns.com/docs" class="sidebar-card sidebar-card--link">
+            <h4>Documentation</h4>
+            <p class="sidebar-card-desc">Setup guides, API references &amp; more</p>
+          </a>
+        </div>
+      </aside>
+
     </div>
   </article>
 
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </BaseLayout>
+
+<style>
+  /* ── Sidebar: sticky with solid background, no height cramping ── */
+  .left-navigation-sidebar,
+  .right-navigation-sidebar {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .left-navigation-sidebar,
+    .right-navigation-sidebar {
+      display: block;
+      position: sticky;
+      top: 90px;
+      /* Solid background so article text never bleeds through */
+      background-color: var(--bg, #ffffff);
+      z-index: 5;
+      /* NO max-height / overflow-y — cards spread out naturally, never squish */
+      align-self: start;
+    }
+  }
+
+  /* Pill label */
+  .sidebar-label {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background: var(--accent, #DA291C);
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+    white-space: nowrap;
+  }
+
+  /* Card list */
+  .sidebar-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  /* Cards */
+  .sidebar-card {
+    display: block;
+    background-color: var(--bg, #ffffff);
+    border: 1px solid var(--border, #e6e8ec);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    color: var(--text, #1a1f29);
+    text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .sidebar-card:hover {
+    border-color: var(--accent, #DA291C);
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+
+  .sidebar-card h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.4;
+    color: var(--text, #1a1f29);
+  }
+
+  .sidebar-card:hover h4 {
+    color: var(--accent, #DA291C);
+  }
+
+  .sidebar-card-desc {
+    font-size: 0.78rem;
+    color: var(--muted, #667085);
+    margin: 0.2rem 0 0;
+    line-height: 1.4;
+  }
+</style>

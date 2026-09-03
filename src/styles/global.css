@@ -362,7 +362,103 @@ main.container {
 
 @media (min-width: 1024px) {
   .post-content-layout {
-    grid-template-columns: 240px minmax(0, 1fr) 260px;
+    grid-template-columns: 220px minmax(0, 1fr) 220px;
+  }
+}
+
+/* ── Navigation Sidebars ─────────────────────────────────────── */
+.left-navigation-sidebar,
+.right-navigation-sidebar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .left-navigation-sidebar,
+  .right-navigation-sidebar {
+    display: block;
+    position: sticky;
+    top: 90px;
+    background: var(--bg);
+    z-index: 2;
+    align-self: start;
+    /* No max-height / overflow — cards spread naturally, no squishing */
+  }
+}
+
+
+/* Sidebar pill label – matches OllaSuper style with site accent colour */
+.sidebar-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background: var(--accent);
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  white-space: nowrap;
+}
+
+/* Card list container */
+.sidebar-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Individual sidebar cards */
+.sidebar-card {
+  display: block;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.sidebar-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px -4px color-mix(in srgb, var(--accent) 20%, transparent);
+  transform: translateY(-1px);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.sidebar-card h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.sidebar-card:hover h4 {
+  color: var(--accent);
+}
+
+/* Description text inside right sidebar cards */
+.sidebar-card-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin: 0.2rem 0 0;
+  line-height: 1.4;
+}
+
+/* Subtle background on hover for dark mode compatibility */
+@media (prefers-color-scheme: dark) {
+  .left-navigation-sidebar,
+  .right-navigation-sidebar {
+    background: var(--bg);
+  }
+  .sidebar-card {
+    background: var(--bg-soft);
+  }
+  .sidebar-card:hover {
+    background: color-mix(in srgb, var(--accent) 5%, var(--bg-soft));
   }
 }
 
