@@ -1,7 +1,7 @@
 ---
 title: "What Is DNS? How the Domain Name System Works"
 description: "DNS is the internet's address book — it turns human-friendly names into the numeric IP addresses computers use to find each other. Here's how it works, step by step, and why it's also one of the most underrated security layers on the internet."
-pubDate: 2026-08-27T00:00:00.000Z
+pubDate: 2026-08-20T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Guide"]
 ---
@@ -418,7 +418,8 @@ Can DNS be used for security protection? +
 
 Yes. Protective DNS resolvers inspect and can block malicious or suspicious domains before a device connects to them, stopping [phishing pages](https://olladns.com/security.html "olladns DNS Security"), [malware command-and-control](https://olladns.com/security.html "Block C2 with olladns") traffic, and lookalike domains at the earliest possible point.
 
-<div class="post-footer" style="margin-top: 3rem; margin-bottom: 1rem; border-top: none; padding-top: 0; text-align: center;">
-  <a class="btn" href="https://olladns.com">Learn more about OllaDNS →</a>
-</div>
+<a href="https://olladns.com" class="content-card" style="display: block; text-align: center; text-decoration: none; margin-top: 2rem; border: 2px solid var(--accent); transition: transform 0.2s ease;">
+  <h3 style="margin: 0; color: var(--accent);">Return to the OllaDNS Homepage →</h3>
+  <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem;">Explore our Protective DNS platform and enterprise solutions.</p>
+</a>
 </div>

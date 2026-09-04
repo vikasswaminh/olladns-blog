@@ -1,7 +1,7 @@
 ---
 title: "DNS Firewall Explained: How DNS Firewalls Protect Networks"
 description: "A DNS firewall stops threats before a single packet reaches your network. Here's exactly how DNS firewalls work, what they block, and how to deploy one without slowing your team down."
-pubDate: 2026-08-21T00:00:00.000Z
+pubDate: 2026-08-27T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Guide"]
 ---
@@ -506,7 +506,8 @@ Done well, it's one of the highest-leverage security investments an organization
 
 The good news is that closing this gap doesn't require rebuilding your security stack from scratch. It requires pointing your resolvers somewhere that's paying attention, and treating a protocol most organizations have quietly ignored for decades with the seriousness its role in nearly every modern attack chain genuinely warrants.
 
-<div class="post-footer" style="margin-top: 3rem; margin-bottom: 1rem; border-top: none; padding-top: 0; text-align: center;">
-  <a class="btn" href="https://olladns.com">Learn more about OllaDNS →</a>
-</div>
+<a href="https://olladns.com" class="content-card" style="display: block; text-align: center; text-decoration: none; margin-top: 2rem; border: 2px solid var(--accent); transition: transform 0.2s ease;">
+  <h3 style="margin: 0; color: var(--accent);">Return to the OllaDNS Homepage →</h3>
+  <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem;">Explore our Protective DNS platform and enterprise solutions.</p>
+</a>
 </div>

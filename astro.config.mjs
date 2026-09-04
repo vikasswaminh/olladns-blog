@@ -13,5 +13,8 @@ export default defineConfig({
   },
   devToolbar: {
     enabled: false
+  },
+  image: {
+    domains: ['images.unsplash.com'],
   }
 });

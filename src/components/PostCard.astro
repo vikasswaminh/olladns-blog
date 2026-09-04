@@ -1,5 +1,6 @@
 ---
 import FormattedDate from './FormattedDate.astro';
+import { Image } from 'astro:assets';
 
 interface Props {
   url: string;
@@ -18,7 +19,7 @@ const image = thumbnailUrl || 'https://images.unsplash.com/photo-1550751827-4bd3
 
 <article class="post-card-new" data-title={title} data-desc={description} data-tags={tags.join(',')}>
   <a href={url}>
-    <img src={image} alt={title} class="post-card-image" width="600" height="340" loading="lazy" decoding="async" />
+    <Image src={image} alt={title} class="post-card-image" width={600} height={340} loading="lazy" decoding="async" />
   </a>
   <div class="post-card-content">
     {tags.length > 0 && (

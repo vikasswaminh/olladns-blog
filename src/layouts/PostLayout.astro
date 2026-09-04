@@ -2,6 +2,8 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import { SITE } from '../config';
 import { readingTime, getPublishedPosts } from '../utils/posts';
 
@@ -65,7 +67,7 @@ const jsonLd = {
         )
       }
     </header>
-    {cover && <img class="post-cover" src={cover} alt="" loading="lazy" />}
+    {cover && <Image class="post-cover" src={cover} alt="" inferSize={true} loading="lazy" decoding="async" />}
 
     <div class="post-content-layout">
 

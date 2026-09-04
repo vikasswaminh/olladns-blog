@@ -394,7 +394,8 @@ Protective DNS isn't a replacement for your firewall or antivirus—it's the cri
 
 
 
-<div class="post-footer" style="margin-top: 3rem; margin-bottom: 1rem; border-top: none; padding-top: 0; text-align: center;">
-  <a class="btn" href="https://olladns.com">Learn more about OllaDNS →</a>
-</div>
+<a href="https://olladns.com" class="content-card" style="display: block; text-align: center; text-decoration: none; margin-top: 2rem; border: 2px solid var(--accent); transition: transform 0.2s ease;">
+  <h3 style="margin: 0; color: var(--accent);">Return to the OllaDNS Homepage →</h3>
+  <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem;">Explore our Protective DNS platform and enterprise solutions.</p>
+</a>
 </div>

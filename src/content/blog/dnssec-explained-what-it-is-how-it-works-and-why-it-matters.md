@@ -1,7 +1,7 @@
 ---
 title: "DNSSEC Explained: What It Is, How It Works, and Why It Matters"
 description: "A comprehensive guide to understanding Domain Name System Security Extensions (DNSSEC), how the chain of trust works, and why it is essential for modern cybersecurity."
-pubDate: 2026-08-25T00:00:00.000Z
+pubDate: 2026-08-24T00:00:00.000Z
 author: 'OllaDNS Security Team'
 tags: ['Guide', 'DNSSEC', 'DNS security']
 ---
@@ -446,7 +446,8 @@ This is exactly the layering that protective DNS platforms are built around. DNS
 DNSSEC is a foundational security layer designed to cryptographically verify the authenticity of DNS records, effectively preventing spoofing and cache poisoning. However, it's not a silver bullet—it doesn't encrypt traffic or block phishing and malware domains. To build a robust DNS security posture, DNSSEC must be combined with encrypted transport (like DoH/DoT) and active threat intelligence. Treat it as the essential groundwork, not the complete solution.
  As organizations scale, solutions like [OllaDNS](https://olladns.com) provide essential visibility and protection at this layer.
 
-<div class="post-footer" style="margin-top: 3rem; margin-bottom: 1rem; border-top: none; padding-top: 0; text-align: center;">
-  <a class="btn" href="https://olladns.com">Learn more about OllaDNS →</a>
-</div>
+<a href="https://olladns.com" class="content-card" style="display: block; text-align: center; text-decoration: none; margin-top: 2rem; border: 2px solid var(--accent); transition: transform 0.2s ease;">
+  <h3 style="margin: 0; color: var(--accent);">Return to the OllaDNS Homepage →</h3>
+  <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem;">Explore our Protective DNS platform and enterprise solutions.</p>
+</a>
 </div>

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getPublishedPosts, readingTime } from '../utils/posts';
 import FormattedDate from '../components/FormattedDate.astro';
+import { Image } from 'astro:assets';
 
 const posts = await getPublishedPosts();
 const featured = posts[0];
@@ -37,7 +38,7 @@ const rest = posts.slice(1);
       {featured && (
         <a href={`/${featured.slug}/`} class="super-featured-card">
           <div class="super-featured-image">
-            <img src={featured.data.image?.url || "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&fm=webp&w=900"} alt={featured.data.title} width="900" height="506" fetchpriority="high" decoding="async" />
+            <Image src={featured.data.image?.url || "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&fm=webp&w=900"} alt={featured.data.title} width={900} height={506} inferSize={true} fetchpriority="high" decoding="async" />
           </div>
           <div class="super-featured-content">
             <span class="badge-premium badge-orange mb-3" style="align-self: flex-start;">{featured.data.tags[0] || 'AI WORKFORCE'}</span>
