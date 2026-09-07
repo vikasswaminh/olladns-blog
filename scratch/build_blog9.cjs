@@ -6,47 +6,50 @@ const outputPath = path.join(__dirname, '..', 'src', 'content', 'blog', 'dns-sec
 const frontmatter = "---\n" +
 "title: \"DNS Security Best Practices: 15 Ways to Secure Enterprise DNS in 2026\"\n" +
 "description: \"DNS is the layer attackers count on you ignoring. Here are 15 practical, field tested DNS security best practices enterprise teams can deploy today, without breaking the network.\"\n" +
-"pubDate: 2026-09-02T00:00:00.000Z\n" +
+"pubDate: 2026-09-07T00:00:00.000Z\n" +
 "author: \"olladns Security Team\"\n" +
 "tags: [\"Guide\"]\n" +
 "---\n";
 
-let tldr = "\n<div class=\"content-card\">\n\n## TL;DR\n" +
+let tldr = "\n<div class=\"content-card\">\n<h2 style=\"margin-top: 0;\">TL;DR</h2>\n" +
 "Enterprise DNS security is a stack, not a setting. DNS sits earlier in the attack chain than almost anything else in your environment, which makes it one of the highest leverage places to intervene and one of the most ignored. This guide walks through 15 best practices that, together, form a real DNS security program. It covers protective DNS filtering and DNSSEC, encrypted transport, resolver hardening, tunneling detection, identity integration, and the operational habits like logging, rollback plans, and exception reviews that keep a deployment from quietly decaying over time. None of these requires ripping out your existing stack. They simply require pointing to your resolvers somewhere that's watching.\n\n</div>\n";
 
 let takeaways = "\n<div class=\"content-card\">\n\n" +
 "<style>\n" +
 ".feature-grid {\n" +
 "    display: grid;\n" +
-"    grid-template-columns: 1fr 1fr;\n" +
-"    gap: 1.5rem;\n" +
-"    margin-top: 1.5rem;\n" +
+"    grid-template-columns: 1fr;\n" +
+"    gap: 0.75rem;\n" +
+"    margin-top: 1rem;\n" +
 "}\n" +
 ".grid-feature-card {\n" +
 "    border: 1px solid #eaeaea;\n" +
-"    border-radius: 8px;\n" +
-"    padding: 1.5rem;\n" +
+"    border-radius: 6px;\n" +
+"    padding: 0.75rem 1rem;\n" +
 "    background: #fff;\n" +
-"    box-shadow: 0 2px 8px rgba(0,0,0,0.02);\n" +
+"    box-shadow: 0 1px 3px rgba(0,0,0,0.02);\n" +
+"}\n" +
+".grid-feature-card-header {\n" +
+"    display: flex;\n" +
+"    align-items: center;\n" +
+"    gap: 0.5rem;\n" +
+"    margin-bottom: 0.3rem;\n" +
 "}\n" +
 ".grid-feature-card h4 {\n" +
-"    margin-top: 0.5rem !important;\n" +
-"    margin-bottom: 0.5rem !important;\n" +
-"    font-size: 1.1rem;\n" +
+"    margin: 0 !important;\n" +
+"    font-size: 0.95rem;\n" +
 "    color: var(--text-main);\n" +
 "}\n" +
 ".grid-feature-card .feature-num {\n" +
 "    color: var(--accent, #d32f2f);\n" +
-"    font-size: 1.3rem;\n" +
+"    font-size: 1rem;\n" +
 "    font-weight: 800;\n" +
-"    margin-bottom: 0.2rem;\n" +
-"    display: block;\n" +
 "}\n" +
 ".grid-feature-card p {\n" +
-"    font-size: 0.95rem;\n" +
+"    font-size: 0.85rem;\n" +
 "    color: var(--text-muted);\n" +
-"    line-height: 1.6;\n" +
-"    margin-bottom: 0;\n" +
+"    line-height: 1.4;\n" +
+"    margin: 0;\n" +
 "}\n" +
 "@media (max-width: 768px) {\n" +
 "    .feature-grid {\n" +
@@ -106,39 +109,48 @@ let takeaways = "\n<div class=\"content-card\">\n\n" +
 "    margin-top: 0.2rem;\n" +
 "}\n" +
 "</style>\n\n" +
-"## Top 5 Key Takeaways\n\n" +
+"<h2 style=\"margin-top: 0;\">Key Takeaways</h2>\n\n" +
 "<div class=\"feature-grid\">\n" +
 "  <div class=\"grid-feature-card\">\n" +
-"    <span class=\"feature-num\">01</span>\n" +
-"    <h4>High Leverage Control</h4>\n" +
+"    <div class=\"grid-feature-card-header\">\n" +
+"      <span class=\"feature-num\">01</span>\n" +
+"      <h4>High Leverage Control</h4>\n" +
+"    </div>\n" +
 "    <p>Protective DNS filtering intercepts phishing, malware, and C2 traffic before a connection is ever made.</p>\n" +
 "  </div>\n" +
 "  <div class=\"grid-feature-card\">\n" +
-"    <span class=\"feature-num\">02</span>\n" +
-"    <h4>Beyond Blocklists</h4>\n" +
+"    <div class=\"grid-feature-card-header\">\n" +
+"      <span class=\"feature-num\">02</span>\n" +
+"      <h4>Beyond Blocklists</h4>\n" +
+"    </div>\n" +
 "    <p>Static blocklists aren't enough. You need behavioral and DGA detection layered on top of reputation feeds.</p>\n" +
 "  </div>\n" +
 "  <div class=\"grid-feature-card\">\n" +
-"    <span class=\"feature-num\">03</span>\n" +
-"    <h4>Encryption & Filtering</h4>\n" +
+"    <div class=\"grid-feature-card-header\">\n" +
+"      <span class=\"feature-num\">03</span>\n" +
+"      <h4>Encryption & Filtering</h4>\n" +
+"    </div>\n" +
 "    <p>Encryption and filtering are not in conflict. A well-architected resolver encrypts traffic while applying full policy.</p>\n" +
 "  </div>\n" +
 "  <div class=\"grid-feature-card\">\n" +
-"    <span class=\"feature-num\">04</span>\n" +
-"    <h4>Universal Coverage</h4>\n" +
+"    <div class=\"grid-feature-card-header\">\n" +
+"      <span class=\"feature-num\">04</span>\n" +
+"      <h4>Universal Coverage</h4>\n" +
+"    </div>\n" +
 "    <p>DNS security must cover every device. Roaming laptops, BYOD, IoT, and guest devices are crucial.</p>\n" +
 "  </div>\n" +
 "  <div class=\"grid-feature-card\">\n" +
-"    <span class=\"feature-num\">05</span>\n" +
-"    <h4>Deployment Discipline</h4>\n" +
+"    <div class=\"grid-feature-card-header\">\n" +
+"      <span class=\"feature-num\">05</span>\n" +
+"      <h4>Deployment Discipline</h4>\n" +
+"    </div>\n" +
 "    <p>Start in monitoring mode, roll out policy in tiers, integrate logs into SIEM, and review exceptions quarterly.</p>\n" +
 "  </div>\n" +
 "</div>\n\n</div>\n";
 
 let mainSectionsHtml = "\n<div class=\"content-card\">\n\n";
 
-mainSectionsHtml += "<span style=\"color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;\">Section 01</span>\n" +
-"## Why Enterprise DNS Deserves This Much Attention\n\n" +
+mainSectionsHtml += "<h2 style=\"margin-top: 0;\">Why Enterprise DNS Deserves This Much Attention</h2>\n\n" +
 "Let's start with an uncomfortable question. If you asked your IT team right now who is actively watching your organization's DNS traffic, what would they say?\n\n" +
 "For most enterprises, the honest answer is nobody, or maybe \"the resolver our ISP handed us by default.\" Compare that to how much scrutiny goes into your firewall rules, your endpoint detection platform, or your email security gateway. DNS, despite being older than the web itself and involved in essentially every single online action your organization takes, tends to get whatever configuration shipped with the router.\n\n" +
 "<div class=\"callout-box\">\n" +
@@ -175,14 +187,13 @@ let sections = [
 
 sections.forEach((sec, i) => {
   let sectionNum = String(i + 2).padStart(2, '0');
-  mainSectionsHtml += "<span style=\"color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;\">Section " + sectionNum + "</span>\n" +
-  "## " + sec.title + "\n\n" +
+  mainSectionsHtml += "## " + sec.title + "\n\n" +
   sec.content + "\n\n";
 });
 
 mainSectionsHtml += "</div>\n";
 
-let faqHtml = "\n<div class=\"content-card\">\n\n" +
+let faqHtml = "\n<div class=\"content-card\">\n<h2 style=\"margin-top: 0;\">Frequently Asked Questions</h2>\n\n" +
 "<style>\n" +
 "  .faq-details {\n" +
 "    margin-bottom: 1rem;\n" +
@@ -217,7 +228,6 @@ let faqHtml = "\n<div class=\"content-card\">\n\n" +
 "    line-height: 1.6;\n" +
 "  }\n" +
 "</style>\n\n" +
-"## Frequently Asked Questions\n\n" +
 "<div class=\"faq-container\">\n" +
 "  <details class=\"faq-item\">\n" +
 "    <summary>What is the single most important DNS security best practice for a mid-size enterprise to start with?</summary>\n" +
@@ -271,13 +281,12 @@ let faqHtml = "\n<div class=\"content-card\">\n\n" +
 "</div>\n" +
 "</div>\n";
 
-let conclusion = "\n<div class=\"content-card\">\n\n" +
-"## Bringing It All Together\n" +
+let conclusion = "\n<div class=\"content-card\">\n<h2 style=\"margin-top: 0;\">Bringing It All Together</h2>\n" +
 "Enterprise DNS security is a layered system where controls like DNSSEC, encrypted transport, and protective filtering reinforce each other. You don't need to rip out your existing stack—just point your resolvers somewhere that's actively watching and blocking threats at the domain lookup stage.\n\n" +
 "> The internet asks the same question billions of times a second: \"Where is this domain?\" **Enterprise DNS security is simply the decision to start paying attention to the answer.**\n\n\n" +
-"<a href=\"https://olladns.com\" style=\"display: block; text-align: center; text-decoration: none; margin-top: 1.5rem; padding: 1rem; border: 1px solid var(--accent); border-radius: 8px; transition: transform 0.2s ease;\">\n" +
-"  <h4 style=\"margin: 0; color: var(--accent);\">Return to the OllaDNS Homepage →</h4>\n" +
-"  <p style=\"margin: 0.2rem 0 0; color: var(--muted); font-size: 0.85rem;\">Explore our Protective DNS platform and enterprise solutions.</p>\n" +
+"<a href=\"/\" style=\"display: block; text-align: center; text-decoration: none; margin-top: 1.5rem; padding: 1rem; border: 1px solid var(--accent); border-radius: 8px; transition: transform 0.2s ease;\">\n" +
+"  <h4 style=\"margin: 0; color: var(--accent);\">Return to the Blog Homepage →</h4>\n" +
+"  <p style=\"margin: 0.2rem 0 0; color: var(--muted); font-size: 0.85rem;\">Explore more insights and guides on DNS security.</p>\n" +
 "</a>\n" +
 "</div>\n";
 

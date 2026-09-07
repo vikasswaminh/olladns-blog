@@ -7,8 +7,7 @@ tags: ["Guide"]
 ---
 
 <div class="content-card">
-
-## TL;DR
+<h2 style="margin-top: 0;">TL;DR</h2>
 Enterprise DNS security is a stack, not a setting. DNS sits earlier in the attack chain than almost anything else in your environment, which makes it one of the highest leverage places to intervene and one of the most ignored. This guide walks through 15 best practices that, together, form a real DNS security program. It covers protective DNS filtering and DNSSEC, encrypted transport, resolver hardening, tunneling detection, identity integration, and the operational habits like logging, rollback plans, and exception reviews that keep a deployment from quietly decaying over time. None of these requires ripping out your existing stack. They simply require pointing to your resolvers somewhere that's watching.
 
 </div>
@@ -18,35 +17,38 @@ Enterprise DNS security is a stack, not a setting. DNS sits earlier in the attac
 <style>
 .feature-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 1rem;
 }
 .grid-feature-card {
     border: 1px solid #eaeaea;
-    border-radius: 8px;
-    padding: 1.5rem;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
     background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+.grid-feature-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 .grid-feature-card h4 {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-    font-size: 1.1rem;
+    margin: 0 !important;
+    font-size: 0.95rem;
     color: var(--text-main);
 }
 .grid-feature-card .feature-num {
     color: var(--accent, #d32f2f);
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 800;
-    margin-bottom: 0.2rem;
-    display: block;
 }
 .grid-feature-card p {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 0;
+    line-height: 1.4;
+    margin: 0;
 }
 @media (max-width: 768px) {
     .feature-grid {
@@ -107,32 +109,42 @@ Enterprise DNS security is a stack, not a setting. DNS sits earlier in the attac
 }
 </style>
 
-## Top 5 Key Takeaways
+<h2 style="margin-top: 0;">Key Takeaways</h2>
 
 <div class="feature-grid">
   <div class="grid-feature-card">
-    <span class="feature-num">01</span>
-    <h4>High Leverage Control</h4>
+    <div class="grid-feature-card-header">
+      <span class="feature-num">01</span>
+      <h4>High Leverage Control</h4>
+    </div>
     <p>Protective DNS filtering intercepts phishing, malware, and C2 traffic before a connection is ever made.</p>
   </div>
   <div class="grid-feature-card">
-    <span class="feature-num">02</span>
-    <h4>Beyond Blocklists</h4>
+    <div class="grid-feature-card-header">
+      <span class="feature-num">02</span>
+      <h4>Beyond Blocklists</h4>
+    </div>
     <p>Static blocklists aren't enough. You need behavioral and DGA detection layered on top of reputation feeds.</p>
   </div>
   <div class="grid-feature-card">
-    <span class="feature-num">03</span>
-    <h4>Encryption & Filtering</h4>
+    <div class="grid-feature-card-header">
+      <span class="feature-num">03</span>
+      <h4>Encryption & Filtering</h4>
+    </div>
     <p>Encryption and filtering are not in conflict. A well-architected resolver encrypts traffic while applying full policy.</p>
   </div>
   <div class="grid-feature-card">
-    <span class="feature-num">04</span>
-    <h4>Universal Coverage</h4>
+    <div class="grid-feature-card-header">
+      <span class="feature-num">04</span>
+      <h4>Universal Coverage</h4>
+    </div>
     <p>DNS security must cover every device. Roaming laptops, BYOD, IoT, and guest devices are crucial.</p>
   </div>
   <div class="grid-feature-card">
-    <span class="feature-num">05</span>
-    <h4>Deployment Discipline</h4>
+    <div class="grid-feature-card-header">
+      <span class="feature-num">05</span>
+      <h4>Deployment Discipline</h4>
+    </div>
     <p>Start in monitoring mode, roll out policy in tiers, integrate logs into SIEM, and review exceptions quarterly.</p>
   </div>
 </div>
@@ -141,8 +153,7 @@ Enterprise DNS security is a stack, not a setting. DNS sits earlier in the attac
 
 <div class="content-card">
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 01</span>
-## Why Enterprise DNS Deserves This Much Attention
+<h2 style="margin-top: 0;">Why Enterprise DNS Deserves This Much Attention</h2>
 
 Let's start with an uncomfortable question. If you asked your IT team right now who is actively watching your organization's DNS traffic, what would they say?
 
@@ -165,7 +176,6 @@ A quick note before we dive in. None of this is about ripping out your firewall 
   <div class="stack-layer">Logging & SIEM Integration <span>(Retain visibility into all network queries)</span></div>
 </div>
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 02</span>
 ## 1. Deploy Protective DNS Filtering at the Resolver Level
 
 If you only do one thing on this list, make it this one. Protective DNS, sometimes called DNS filtering or DNS threat intelligence, inspects every lookup your network makes in real time against known bad domains, freshly registered domains with suspicious characteristics, algorithmically generated domains, and whatever categories your policy chooses to block. When a device tries to resolve something dangerous, the resolver simply refuses to answer, or hands back a safe warning page instead of the real address.
@@ -174,7 +184,6 @@ If you only do one thing on this list, make it this one. Protective DNS, sometim
 
 When you're deploying this, resist the urge to flip straight to full enforcement. Start in monitoring mode for a couple of weeks. You'll learn two things fast: what your actual baseline DNS traffic looks like (you'll be surprised how many SaaS tools and background services are constantly phoning home), and how much risky traffic is already quietly present. Both inform how aggressively you can enforce policy without a VP's favorite tool suddenly breaking.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 03</span>
 ## 2. Turn On DNSSEC Across Every Authoritative Zone
 
 DNSSEC solves a different problem than filtering does. It's about authenticity, not content. It adds cryptographic signatures to your DNS records so that resolvers can verify a response genuinely coming from your authoritative nameserver and wasn't tampered with along the way. That directly counters spoofing and cache poisoning attacks, where an attacker injects a forged record into a resolver's cache so that a user typing the correct URL still gets silently redirected to a malicious server.
@@ -183,7 +192,6 @@ This is one of the more commonly skipped best practices, mostly because it has a
 
 Enable it in every zone you're authoritative for, not just your primary domain. Attackers love forgotten subdomains and legacy zones precisely because they tend to be the ones nobody remembers to lock down.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 04</span>
 ## 3. Encrypt DNS in Transit with DoH, DoT, or DoQ
 
 Plaintext DNS queries can be read and, in the wrong network conditions, tampered with by anyone sitting on the path between a device and its resolver. That's not a theoretical risk on public WiFi, hotel networks, or any network your organization doesn't fully control, which, given how much work now happens outside the office, describes quite a lot of networks.
@@ -192,21 +200,18 @@ Three protocols solve this by encrypting DNS queries in transit. DNS over HTTPS 
 
 Here's the part worth saying directly, because it's a myth that stops a lot of organizations from adopting encrypted DNS: encryption does not break filtering. Encrypting a query in transit protects it from being read or altered by a third party sitting on the network path. It says nothing about what the resolver you've deliberately chosen to send that query to is allowed to do with it.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 05</span>
 ## 4. Lock Down Recursive Resolvers and Kill Open Resolvers for Good
 
 An open DNS resolver is one that answers recursive queries from any source on the internet, not just your own network or authorized clients. Open resolvers are a favorite tool for DNS amplification attacks, where an attacker sends a small, forged query and the resolver reflects a much larger response at a victim, effectively turning your infrastructure into a weapon in someone else's DDoS attack against a third party.
 
 If your organization runs any authoritative or recursive DNS infrastructure of its own, and many enterprises do, even if it's just an internal resolver for corporate devices, audit it specifically for this. Recursive resolution should only be available to your own network ranges and authenticated clients. Response Rate Limiting should be configured to throttle abusive query volumes automatically. And any resolver that doesn't strictly need to be internet facing shouldn't be.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 06</span>
 ## 5. Implement Response Policy Zones for Real Time Enforcement
 
 Response Policy Zones, or RPZ, are the mechanism that makes real time blocking at the resolver level possible and scalable, rather than something bolted on as an afterthought. RPZ lets a DNS resolver apply custom policy to specific domains: overriding a response for a known bad domain, redirecting the query to a warning page, or simply returning NXDOMAIN (meaning this domain doesn't exist) instead of the real answer.
 
 Think of RPZ as the plumbing underneath protective DNS filtering. The threat intelligence tells the system which domains are dangerous, and RPZ is what enforces that decision now a device asks the question, at scale, across every query your network handles, without meaningfully adding latency.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 07</span>
 ## 6. Log Every DNS Query and Feed It into Your SIEM
 
 DNS query logs are one of the most underrated data sources in enterprise security, and they’re not close. Every device, every app, every background service, and every piece of malware trying to reach a command server generates DNS traffic constantly. If you're logging into it, you have visibility into essentially everything trying to communicate outward from your network, a vantage point most organizations aren't using at all.
@@ -215,35 +220,30 @@ DNS query logs are one of the most underrated data sources in enterprise securit
 
 This matters for incident response as much as detection. When something goes wrong, DNS logs frequently hold the earliest evidence of what happened: the first lookup to a command-and-control domain, the first sign of a tunneling pattern, or the moment a compromised account started resolving domains it never had before.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 08</span>
 ## 7. Detect Domain Generation Algorithms and Behavioral Anomalies
 
 Modern malware families, especially the ones built for resilience against takedown efforts, frequently use domain generation algorithms to produce large numbers of pseudo random domains on a schedule, sometimes thousands per day. The malware and the attacker's infrastructure both run the same algorithm independently, arriving at the same set of domains without needing a hardcoded command server address that defenders could simply block once and be done with it.
 
 The only reliable countermeasure is behavioral and statistical detection, recognizing the pattern of algorithmically generated domains rather than trying to catch each individual name. That means watching for unusual entropies in domain strings, characteristic length distributions that don't match how humans name things, and high volumes of NXDOMAIN responses as malware cycles through dozens or hundreds of generated candidates hoping one resolves.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 09</span>
 ## 8. Shut Down DNS Tunneling Before It Becomes an Exfiltration Channel
 
 DNS tunneling is one of the more elegant, and more dangerous, abuses of the protocol, precisely because DNS traffic is almost universally allowed through firewalls. Port 53 stays open on nearly every network on earth, because blocking it breaks the internet for that network. Attackers know this, and they use it as a covert channel.
 
 Catching this requires looking at query characteristics that a normal DNS lookup simply doesn't have unusually long subdomain labels, high query volume to a single domain in a short window, high entropy in the queried names, and query patterns that don't match how legitimate applications use DNS. A dedicated DNS security platform with tunneling detection built in will flag this automatically.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 10</span>
 ## 9. Restrict Zone Transfers and Lock Down AXFR
 
 Zone transfers, the mechanism secondary nameservers use to replicate a full copy of a DNS zone from a primary server, can hand an attacker your organization's entire DNS map in a single request if they're left unrestricted. That's every subdomain, every internal hostname, and every piece of infrastructure you've ever pointed a DNS record at, served up in one convenient list to anyone who asks.
 
 This should be restricted to explicitly authorized secondary nameservers only, using IP allowlisting at minimum and TSIG (transaction signature) authentication where your infrastructure supports it. Periodically test this from outside your network. Attempt a zone transfer against your public nameservers the way an attacker would and confirm it's refused.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 11</span>
 ## 10. Harden Registrar and Domain Level Security
 
 DNS security conversations tend to focus heavily on resolvers and query traffic, and understandably so, since that's where the day-to-day threats live. But your domain registrar account itself is a single point of failure that, if compromised, bypasses almost everything else on this list entirely. If an attacker gains control of your registrar account, they can repoint your DNS records anywhere they want, and every technical control downstream of that becomes irrelevant.
 
 Enable a registry lock on your most critical domains, which requires an out of band verification step before any DNS or name server change can go through. Enforce multi factor authentication on every registrar account with administrative access, and audit who has that access.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 12</span>
 ## 11. Build Redundant, Segmented Resolver Architecture
 
 A DNS security layer that goes down along with your primary upstream provider isn't protecting anyone. It's just adding a single point of failure to your network's most fundamental function. Real resilience here means a few specific architectural choices.
@@ -252,28 +252,24 @@ A DNS security layer that goes down along with your primary upstream provider is
 
 Split horizon DNS, where internal and external queries get different answers for the same domain, prevents your internal infrastructure map from being exposed to the public internet through a misconfigured public facing resolver.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 13</span>
 ## 12. Extend Protection to Roaming, Remote, and Unmanaged Devices
 
 This is where a lot of otherwise well-built DNS security programs quietly fail, and it's worth being blunt about it. Protection that only applies while a device sits on the corporate office network offers very little value in a world where a large share of work happens on home Wi-Fi, coffee shop connections, and airport lounges.
 
 A resilient approach applies protection at multiple points simultaneously. On managed devices, that means a roaming client deployed silently through your MDM platform. On the network level, it means protecting everything that isn't running an endpoint agent at all: guest devices, IoT hardware, unmanaged BYOD phones, printers, and even the smart TV in the third-floor conference room.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 14</span>
 ## 13. Integrate Identity So Policy Follows the User, Not the IP
 
 Traditional network security policy tends to be built around IP addresses and network segments: this subnet gets this policy, that VLAN gets that one. That model breaks down fast in an environment where people move between networks constantly, where IP addresses get reassigned by DHCP, and where the same device might be on the corporate network in the morning and a home network by afternoon.
 
 Syncing your DNS security policy with your identity provider, whether that's Entra ID, Okta, or Google Workspace, through SCIM provisioning and group mapping lets policy travel with the user and the group they belong to, rather than the network segment they happen to be sitting on at a given moment.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 15</span>
 ## 14. Guard Explicitly Against Spoofing and Cache Poisoning
 
 DNS spoofing, sometimes called cache poisoning, involves injecting false DNS records into a resolver's cache so that a legitimate domain lookup gets silently redirected to a malicious IP address. This is particularly nasty because it defeats the most basic phishing advice anyone's ever been given, which is checking the URL bar. The domain name displayed is correct. It's the destination underneath that's been swapped.
 
 Beyond DNSSEC, which we covered earlier and which directly addresses this by cryptographically verifying response authenticity, a few specific hardening steps matter here. Confirm your resolvers use proper source port and transaction ID randomization rather than predictable sequences. Enabled DNS Cookies where supported, a lightweight mechanism that helps resolvers distinguish legitimate responses from off path forgery attempts.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 16</span>
 ## 15. Plan Your Rollback and Review Exceptions on Real Cadence
 
 The last item on this list isn't technology at all. It's operational discipline, and it's the difference between a DNS security deployment that stays effective for years and one that quietly decays into theater within eighteen months.
@@ -285,6 +281,7 @@ The second half of this practice is exception management. Every DNS security dep
 </div>
 
 <div class="content-card">
+<h2 style="margin-top: 0;">Frequently Asked Questions</h2>
 
 <style>
   .faq-details {
@@ -320,8 +317,6 @@ The second half of this practice is exception management. Every DNS security dep
     line-height: 1.6;
   }
 </style>
-
-## Frequently Asked Questions
 
 <div class="faq-container">
   <details class="faq-item">
@@ -377,15 +372,14 @@ The second half of this practice is exception management. Every DNS security dep
 </div>
 
 <div class="content-card">
-
-## Bringing It All Together
+<h2 style="margin-top: 0;">Bringing It All Together</h2>
 Enterprise DNS security is a layered system where controls like DNSSEC, encrypted transport, and protective filtering reinforce each other. You don't need to rip out your existing stack—just point your resolvers somewhere that's actively watching and blocking threats at the domain lookup stage.
 
 > The internet asks the same question billions of times a second: "Where is this domain?" **Enterprise DNS security is simply the decision to start paying attention to the answer.**
 
 
-<a href="https://olladns.com" style="display: block; text-align: center; text-decoration: none; margin-top: 1.5rem; padding: 1rem; border: 1px solid var(--accent); border-radius: 8px; transition: transform 0.2s ease;">
-  <h4 style="margin: 0; color: var(--accent);">Return to the OllaDNS Homepage →</h4>
-  <p style="margin: 0.2rem 0 0; color: var(--muted); font-size: 0.85rem;">Explore our Protective DNS platform and enterprise solutions.</p>
+<a href="/" style="display: block; text-align: center; text-decoration: none; margin-top: 1.5rem; padding: 1rem; border: 1px solid var(--accent); border-radius: 8px; transition: transform 0.2s ease;">
+  <h4 style="margin: 0; color: var(--accent);">Return to the Blog Homepage →</h4>
+  <p style="margin: 0.2rem 0 0; color: var(--muted); font-size: 0.85rem;">Explore more insights and guides on DNS security.</p>
 </a>
 </div>
