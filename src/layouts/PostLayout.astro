@@ -69,16 +69,14 @@ const jsonLd = {
     </header>
     {cover && <Image class="post-cover" src={cover} alt="" inferSize={true} loading="lazy" decoding="async" />}
 
-    <div class="post-content-layout">
+    <div class="post-content-layout" style="margin-top: 0.75rem;">
 
       <!-- Left Sidebar: All Blog Posts -->
       <aside class="left-navigation-sidebar">
         <p class="sidebar-label">ALL BLOG POSTS</p>
-        <ul class="sidebar-post-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem;">
+        <ul class="sidebar-post-list">
           {otherPosts.map((p) => (
-            <li>
-              <a href={`/${p.slug}/`} style="color: var(--text); font-weight: 500; font-size: 0.9rem; line-height: 1.4; text-decoration: none;">{p.data.title}</a>
-            </li>
+            <li><a href={`/${p.slug}/`}>{p.data.title}</a></li>
           ))}
         </ul>
       </aside>
@@ -91,41 +89,41 @@ const jsonLd = {
       <!-- Right Sidebar: OllaDNS Navigation Links -->
       <aside class="right-navigation-sidebar">
         <p class="sidebar-label">OLLADNS</p>
-        <ul class="sidebar-links-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.25rem;">
+        <ul class="sidebar-links-list">
           <li>
-            <a href="https://olladns.com" style="text-decoration: none; display: block;">
-              <h4 style="margin: 0; font-size: 0.85rem; font-weight: 600; color: var(--text);">OllaDNS Homepage</h4>
-              <p style="margin: 0.2rem 0 0; font-size: 0.78rem; color: var(--muted); line-height: 1.4;">Explore the OllaDNS platform and products</p>
+            <a href="https://olladns.com">
+              <h4>OllaDNS Homepage</h4>
+              <p>Explore the OllaDNS platform and products</p>
             </a>
           </li>
           <li>
-            <a href="/" style="text-decoration: none; display: block;">
-              <h4 style="margin: 0; font-size: 0.85rem; font-weight: 600; color: var(--text);">OllaDNS Blog</h4>
-              <p style="margin: 0.2rem 0 0; font-size: 0.78rem; color: var(--muted); line-height: 1.4;">Follow the OllaDNS blog for the latest insights and news</p>
+            <a href="/">
+              <h4>OllaDNS Blog</h4>
+              <p>Follow the OllaDNS blog for the latest insights and news</p>
             </a>
           </li>
           <li>
-            <a href="https://olladns.com/products" style="text-decoration: none; display: block;">
-              <h4 style="margin: 0; font-size: 0.85rem; font-weight: 600; color: var(--text);">Protective DNS Platform</h4>
-              <p style="margin: 0.2rem 0 0; font-size: 0.78rem; color: var(--muted); line-height: 1.4;">Block threats at the DNS resolver level</p>
+            <a href="https://olladns.com/products">
+              <h4>Protective DNS Platform</h4>
+              <p>Block threats at the DNS resolver level</p>
             </a>
           </li>
           <li>
-            <a href="https://olladns.com/solutions" style="text-decoration: none; display: block;">
-              <h4 style="margin: 0; font-size: 0.85rem; font-weight: 600; color: var(--text);">Industry Solutions</h4>
-              <p style="margin: 0.2rem 0 0; font-size: 0.78rem; color: var(--muted); line-height: 1.4;">Tailored DNS security for every sector</p>
+            <a href="https://olladns.com/solutions">
+              <h4>Industry Solutions</h4>
+              <p>Tailored DNS security for every sector</p>
             </a>
           </li>
           <li>
-            <a href="https://olladns.com/pricing" style="text-decoration: none; display: block;">
-              <h4 style="margin: 0; font-size: 0.85rem; font-weight: 600; color: var(--text);">Plans &amp; Pricing</h4>
-              <p style="margin: 0.2rem 0 0; font-size: 0.78rem; color: var(--muted); line-height: 1.4;">Find the right plan for your organisation</p>
+            <a href="https://olladns.com/pricing">
+              <h4>Plans &amp; Pricing</h4>
+              <p>Find the right plan for your organisation</p>
             </a>
           </li>
           <li>
-            <a href="https://olladns.com/docs" style="text-decoration: none; display: block;">
-              <h4 style="margin: 0; font-size: 0.85rem; font-weight: 600; color: var(--text);">Documentation</h4>
-              <p style="margin: 0.2rem 0 0; font-size: 0.78rem; color: var(--muted); line-height: 1.4;">Setup guides, API references &amp; more</p>
+            <a href="https://olladns.com/docs">
+              <h4>Documentation</h4>
+              <p>Setup guides, API references &amp; more</p>
             </a>
           </li>
         </ul>
@@ -138,7 +136,7 @@ const jsonLd = {
 </BaseLayout>
 
 <style>
-  /* ── Sidebar: sticky with solid background, no height cramping ── */
+  /* ── Sidebar: sticky with solid background ── */
   .left-navigation-sidebar,
   .right-navigation-sidebar {
     display: none;
@@ -150,15 +148,13 @@ const jsonLd = {
       display: block;
       position: sticky;
       top: 90px;
-      /* Solid background so article text never bleeds through */
       background-color: var(--bg, #ffffff);
       z-index: 5;
-      /* NO max-height / overflow-y — cards spread out naturally, never squish */
       align-self: start;
     }
   }
 
-  /* Pill label */
+  /* Red pill label */
   .sidebar-label {
     display: inline-block;
     font-size: 0.72rem;
@@ -169,51 +165,75 @@ const jsonLd = {
     background: var(--accent, #DA291C);
     padding: 0.3rem 0.9rem;
     border-radius: 999px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     white-space: nowrap;
   }
 
-  /* Card list */
-  .sidebar-card-list {
+  /* Left sidebar: blog post list */
+  .sidebar-post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 8px;
   }
 
-  /* Cards */
-  .sidebar-card {
+  .sidebar-post-list li a {
     display: block;
-    background-color: var(--bg, #ffffff);
-    border: 1px solid var(--border, #e6e8ec);
-    border-radius: 10px;
-    padding: 0.75rem 0.9rem;
+    font-size: 0.88rem;
     color: var(--text, #1a1f29);
+    font-weight: 500;
     text-decoration: none;
-    transition: border-color 0.15s ease, transform 0.15s ease;
+    padding: 6px 10px;
+    border-radius: 6px;
+    line-height: 1.45;
+    transition: color 0.15s, background 0.15s;
   }
 
-  .sidebar-card:hover {
-    border-color: var(--accent, #DA291C);
-    transform: translateY(-1px);
-    text-decoration: none;
+  .sidebar-post-list li a:hover {
+    color: var(--accent, #DA291C);
+    background: rgba(218, 41, 28, 0.05);
   }
 
-  .sidebar-card h4 {
-    font-size: 0.85rem;
-    font-weight: 600;
+  /* Right sidebar: OllaDNS links */
+  .sidebar-links-list {
+    list-style: none;
     margin: 0;
-    line-height: 1.4;
-    color: var(--text, #1a1f29);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .sidebar-card:hover h4 {
+  .sidebar-links-list li a {
+    display: block;
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+
+  .sidebar-links-list li a:hover {
+    background: rgba(218, 41, 28, 0.05);
+  }
+
+  .sidebar-links-list li a:hover h4 {
     color: var(--accent, #DA291C);
   }
 
-  .sidebar-card-desc {
-    font-size: 0.78rem;
+  .sidebar-links-list h4 {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text, #1a1f29);
+    line-height: 1.4;
+  }
+
+  .sidebar-links-list p {
+    margin: 2px 0 0;
+    font-size: 0.75rem;
     color: var(--muted, #667085);
-    margin: 0.2rem 0 0;
     line-height: 1.4;
   }
 </style>
