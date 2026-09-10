@@ -5,28 +5,46 @@ pubDate: 2026-09-04T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Threat Research"]
 ---
-
 <div class="content-card">
   <div class="premium-card-header">
+    <span class="card-badge">KEY TAKEAWAYS</span>
+  </div>
+
+<div class="takeaway-cards">
+  <div class="takeaway-card">
+    <span class="takeaway-num">01</span>
+    <span class="takeaway-text">DNS tunneling hides data and commands inside ordinary looking DNS queries, exploiting the fact that DNS traffic is almost universally permitted through firewalls and rarely inspected at the content level.</span>
+  </div>
+  <div class="takeaway-card">
+    <span class="takeaway-num">02</span>
+    <span class="takeaway-text">The technique isn't a DNS vulnerability. It's a trust gap. Attackers register a domain, control its authoritative nameserver, and use that control to decode data smuggled into subdomain labels and encode instructions back into responses.</span>
+  </div>
+  <div class="takeaway-card">
+    <span class="takeaway-num">03</span>
+    <span class="takeaway-text">Traditional firewalls and signature-based tools structurally miss this, because they filter by IP address and port rather than analyzing the actual content and behavior of individual DNS queries.</span>
+  </div>
+  <div class="takeaway-card">
+    <span class="takeaway-num">04</span>
+    <span class="takeaway-text">The telltale signs are statistical, not obvious. Unusually long or high entropy subdomains, abnormal query volume to a single domain, elevated NXDOMAIN rates, heavy TXT or NULL record usage, and suspiciously regular query timing are most powerful when correlated together against a real traffic baseline.</span>
+  </div>
+  <div class="takeaway-card">
+    <span class="takeaway-num">05</span>
+    <span class="takeaway-text">Continuous, behavior-based DNS monitoring, not periodic manual hunting alone, is what closes this gap, catching tunneling activity in real time at the resolver, before stolen data finishes leaving the network.</span>
+  </div>
+</div>
+</div>
+
+<div class="content-card">
+
+<div class="premium-card-header">
     <span class="card-badge">TL;DR</span>
     <h3>DNS Tunneling: A Covert Channel</h3>
   </div>
 
   <p class="tldr-paragraph">DNS tunneling hides stolen data, malware instructions, and full command and control channels inside ordinary looking DNS queries, the one type of traffic almost every firewall on the planet lets through without a second look. Attackers encode payloads into subdomain labels, send them to a domain they control, and let their own nameserver decode the message on the other end. Because it rides on port 53, a protocol nobody blocks and few people log closely, it slips past traditional network defenses that are busy watching IP addresses and ports instead of the actual content of a lookup. This piece walks through exactly how tunneling works at the packet level, the real tools and malware families that use it, why conventional monitoring misses it, and the specific behavioral signals, things like entropy, subdomain length, query volume, timing, and record type abuse, that let a properly tuned DNS security layer catch it before data actually leaves the building.</p>
-</div>
 
-<div class="content-card">
 
-## Key Takeaways
-* DNS tunneling hides data and commands inside ordinary looking DNS queries, exploiting the fact that DNS traffic is almost universally permitted through firewalls and rarely inspected at the content level.
-* The technique isn't a DNS vulnerability. It's a trust gap. Attackers register a domain, control its authoritative nameserver, and use that control to decode data smuggled into subdomain labels and encode instructions back into responses.
-* Traditional firewalls and signature-based tools structurally miss this, because they filter by IP address and port rather than analyzing the actual content and behavior of individual DNS queries.
-* The telltale signs are statistical, not obvious. Unusually long or high entropy subdomains, abnormal query volume to a single domain, elevated NXDOMAIN rates, heavy TXT or NULL record usage, and suspiciously regular query timing are most powerful when correlated together against a real traffic baseline.
-* Continuous, behavior-based DNS monitoring, not periodic manual hunting alone, is what closes this gap, catching tunneling activity in real time at the resolver, before stolen data finishes leaving the network.
 
-</div>
-
-<div class="content-card">
 
 ## The Delivery Truck Nobody Searches
 Every office building has a loading dock. Trucks roll in all day long, dropping off paper, printer toner, catering, packages. Nobody stops each one and unpacks every box, because if they did, the building would grind to a halt by 10 a.m. Security teams learn to trust the loading dock. It's just logistics. It's boring. It's the last place anyone expects a problem.
@@ -145,46 +163,12 @@ Encrypted DNS adoption continues to grow, which raises the stakes on organizatio
 Attackers are increasingly layering tunneling techniques with other evasion methods: deliberately slower query rates to stay under volume thresholds, more sophisticated encoding designed to reduce entropy signatures, and blending malicious queries among legitimate looking domains to make baseline comparison harder. This dynamic arms race is exactly why static; one-time tuned detection rules tend to degrade in effectiveness over time without ongoing refinement.
 And DNS layer security generally is being treated with increasing seriousness as a first-class detection surface rather than an afterthought, with more organizations building continuous, real time DNS query analysis directly into their core security stack instead of treating DNS visibility as a nice to have bolted on after everything else is already in place.
 
-</div>
 
-<div class="content-card" id="frequently-asked-questions">
+
+
 
 ## Frequently Asked Questions
 
-<style>
-  .faq-details {
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 1rem;
-  }
-  .faq-summary {
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
-    font-size: 1.1rem;
-    color: var(--text-main, #333);
-  }
-  .faq-summary::-webkit-details-marker {
-    display: none;
-  }
-  .faq-details[open] .faq-plus {
-    transform: rotate(45deg);
-    transition: transform 0.2s ease;
-  }
-  .faq-plus {
-    font-size: 1.5rem;
-    transition: transform 0.2s ease;
-    color: var(--accent, #d32f2f);
-  }
-  .faq-answer {
-    margin-top: 1rem;
-    color: var(--text-muted, #555);
-    line-height: 1.6;
-  }
-</style>
 
 
   <details class="faq-details">
@@ -235,18 +219,13 @@ And DNS layer security generally is being treated with increasing seriousness as
   </details>
 
 
-</div>
 
-<div class="content-card">
+
+
 
 ## Bringing It All Together
 DNS tunneling endures as an attack technique for a simple reason. It exploits something almost impossible to fix without breaking the internet itself. DNS must be permitted through every firewall, must be trusted by default, and must move fast, and every one of those requirements is exactly what an attacker needs to build a reliable, low visibility channel for moving data and instructions in and out of a compromised network.
 It isn't a flaw in DNS. It's a mismatch between how much trust a foundational protocol was built to carry and how little scrutiny that protocol has historically received from the security tools meant to be watching it. Traditional firewalls watch addresses and ports. Traditional monitoring often doesn't log on to DNS content at all. And attackers, quietly and consistently, have known this for over two decades.
 Closing the gap doesn't require reinventing network security from scratch. It requires looking at DNS traffic, measuring entropy, tracking volume, watching timing, questioning unusual record type usage, with the same seriousness applied to web traffic, email, and endpoint activity for years. The organizations that treat DNS as a genuine, continuously monitored security surface are the ones that catch this technique in minutes. The ones that still treat it as invisible background plumbing are the ones that find out about it in a breach report, months after the data had already left the building.
-
-
-
-
-
 
 </div>

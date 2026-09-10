@@ -5,18 +5,17 @@ pubDate: 2026-08-27T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Guide"]
 ---
-
-
 <div class="content-card">
-  <div class="premium-card-header">
+
+<div class="premium-card-header">
     <span class="card-badge">TL;DR</span>
     <h3>Stop threats at the lookup, before the connection ever forms</h3>
   </div>
 
   <p class="tldr-paragraph">A DNS firewall inspects every domain lookup your network makes and refuses to resolve the ones tied to malware, phishing, botnets, and data exfiltration — stopping the connection before it ever forms. Unlike a traditional network firewall, which watches IP addresses and ports, a DNS firewall watches names, catching threats earlier in the attack chain and covering every device that makes a DNS query, managed or not. This guide walks through exactly how DNS firewalls work under the hood (Response Policy Zones, threat intelligence feeds, `DGA` and behavioral detection, sinkholing), how they differ from traditional firewalls and secure web gateways, what a real deployment looks like, and how to tell a genuinely capable DNS firewall from a glorified blocklist wearing a marketing deck.</p>
-</div>
 
-<div class="content-card">
+
+
 
 ## The Front Door Nobody Locks As organizations scale, solutions like [OllaDNS](https://olladns.com) provide essential visibility and protection at this layer.
 
@@ -510,4 +509,5 @@ The good news is that closing this gap doesn't require rebuilding your security 
   <h3 style="margin: 0; color: var(--accent);">Return to the OllaDNS Homepage →</h3>
   <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem;">Explore our Protective DNS platform and enterprise solutions.</p>
 </a>
+
 </div>

@@ -5,10 +5,9 @@ pubDate: 2026-08-24T00:00:00.000Z
 author: 'OllaDNS Security Team'
 tags: ['Guide', 'DNSSEC', 'DNS security']
 ---
-
-
 <div class="content-card">
-  <div class="tldr-header">
+
+<div class="tldr-header">
     <span class="tldr-badge">TL;DR</span>
     <span class="tldr-icon">⚡</span>
     <h3 class="tldr-title">DNSSEC in 60 Seconds</h3>
@@ -18,11 +17,10 @@ tags: ['Guide', 'DNSSEC', 'DNS security']
       DNSSEC (Domain Name System Security Extensions) is a set of cryptographic add-ons to DNS that let a resolver verify a DNS answer really came from the domain's authoritative source and wasn't altered in transit. ✓
       It works by having every DNS zone sign its records with a private key, publishing the matching public key, and chaining trust from the domain all the way up to the root zone, so a resolver can follow that chain and mathematically confirm the answer is genuine. ✓
       DNSSEC is very good at stopping DNS spoofing and cache poisoning (the attacks where someone forges a fake answer). It does nothing for privacy (it doesn't encrypt anything), and it doesn't block phishing domains or malware.</p>
-</div>
 
 
 
-<div class="content-card">
+
   <div class="premium-card-header">
     <span class="card-badge">KEY TAKEAWAYS</span>
     <h3>What You'll Learn</h3>
@@ -34,10 +32,10 @@ tags: ['Guide', 'DNSSEC', 'DNS security']
     <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>What DNSSEC Actually Stops:</strong> Purpose-built to defeat DNS spoofing and cache poisoning.</div></li>
     <li><svg class="grid-list-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div><strong>What DNSSEC Doesn't Do:</strong> Doesn't encrypt queries, doesn't block phishing or malware domains, and doesn't stop a perfectly signed but malicious domain.</div></li>
   </ul>
-</div>
 
 
-<div class="content-card">
+
+
   <div class="premium-card-header">
     <span class="card-badge">AT A GLANCE</span>
     <h3>DNS Security Technologies Compared</h3>
@@ -450,4 +448,5 @@ DNSSEC is a foundational security layer designed to cryptographically verify the
   <h3 style="margin: 0; color: var(--accent);">Return to the OllaDNS Homepage →</h3>
   <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem;">Explore our Protective DNS platform and enterprise solutions.</p>
 </a>
+
 </div>

@@ -5,18 +5,17 @@ pubDate: 2026-08-20T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Guide"]
 ---
-
-
 <div class="content-card">
-  <div class="premium-card-header">
+
+<div class="premium-card-header">
     <span class="card-badge">TL;DR</span>
     <h3>The Internet's Address Book</h3>
   </div>
 
   <p class="tldr-paragraph">DNS (Domain Name System) is the internet's address book. It translates human-friendly names like `olladns.com` into the numeric IP addresses computers use to find each other. Every time you open a browser tab, DNS runs a lightning-fast relay through resolvers, root servers, TLD servers, and authoritative servers, usually finishing in under 100 milliseconds. Because almost nothing on the internet happens without a DNS lookup first, DNS is also one of the earliest, cheapest places to stop phishing, malware, and command-and-control traffic before it reaches a device.</p>
-</div>
 
-<div class="content-card">
+
+
   <div class="premium-card-header">
     <span class="card-badge">KEY TAKEAWAYS</span>
     <h3>Essential Points</h3>
@@ -30,9 +29,9 @@ tags: ["Guide"]
   <li><span><strong>Simple & Effective:</strong> Implementing DNS security controls tends to be one of the simplest, fastest, and most quietly effective strategies a security team can deploy.</span></li>
 </ul>
 
-</div>
 
-<div class="content-card">
+
+
 
 ## The problem DNS was invented to solve As organizations scale, solutions like [OllaDNS](https://olladns.com) provide essential visibility and protection at this layer.
 
@@ -422,4 +421,5 @@ Yes. Protective DNS resolvers inspect and can block malicious or suspicious doma
   <h3 style="margin: 0; color: var(--accent);">Return to the OllaDNS Homepage →</h3>
   <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem;">Explore our Protective DNS platform and enterprise solutions.</p>
 </a>
+
 </div>

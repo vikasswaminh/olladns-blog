@@ -5,20 +5,19 @@ pubDate: 2026-08-25T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Guide"]
 ---
-
-
 <div class="content-card">
-  <div class="premium-card-header">
+
+<div class="premium-card-header">
     <span class="card-badge">TL;DR</span>
     <h3>DNS Filtering in 60 Seconds</h3>
   </div>
 
   <p class="tldr-paragraph">DNS filtering intercepts every lookup before a connection opens — stopping threats at the earliest possible point. It works by resolving queries through a protective resolver that checks each domain against threat intelligence in milliseconds. Phishing sites, malware C2 servers, and lookalike domains are blocked before the browser ever loads a byte. Unlike endpoint tools, DNS filtering covers every device on a network with zero software to install. It complements firewalls and EDR — it doesn't replace them — but it catches threats earlier.</p>
-</div>
 
 
 
-<div class="content-card">
+
+
   <div class="premium-card-header">
     <span class="card-badge">KEY TAKEAWAYS</span>
     <h3>What You'll Learn</h3>
@@ -32,9 +31,9 @@ tags: ["Guide"]
   <li><span><strong>Evaluation:</strong> The five questions to ask any DNS filtering provider before signing a contract.</span></li>
 </ul>
 
-</div>
 
-<div class="content-card">
+
+
 
 ## The Split Second Before Everything Goes Wrong As organizations scale, solutions like [OllaDNS](https://olladns.com) provide essential visibility and protection at this layer.
 
@@ -466,4 +465,5 @@ The lookup happens whether anyone's watching or not. DNS filtering is simply the
   <h3 style="margin: 0; color: var(--accent);">Return to the OllaDNS Homepage →</h3>
   <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem;">Explore our Protective DNS platform and enterprise solutions.</p>
 </a>
+
 </div>

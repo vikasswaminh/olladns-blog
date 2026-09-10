@@ -5,20 +5,19 @@ pubDate: 2026-09-01T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Guide"]
 ---
-
-
 <div class="content-card">
-  <div class="premium-card-header">
+
+<div class="premium-card-header">
     <span class="card-badge">TL;DR</span>
     <h3>DNS Over HTTPS in 60 Seconds</h3>
   </div>
 
   <p class="tldr-paragraph">DNS Over HTTPS wraps DNS queries inside HTTPS traffic, encrypting them so ISPs and network eavesdroppers can't see which domains you're visiting. It's gradually becoming standard on modern devices and browsers, backed by major companies like Apple, Mozilla, and Google—but adoption remains patchy due to organizational complexity, deployment friction, and legitimate tension between privacy and network security monitoring. This guide breaks down exactly what DoH does (stops ISP-level surveillance of DNS queries), what it doesn't (protect against malicious resolvers or malware), how it differs from DoT and DoQ, real deployment challenges in organizations, and why "just encrypt everything" is more complicated in the DNS world than it initially sounds.</p>
-</div>
 
 
 
-<div class="content-card">
+
+
   <div class="premium-card-header">
     <span class="card-badge">KEY TAKEAWAYS</span>
     <h3>What You'll Learn</h3>
@@ -32,9 +31,9 @@ tags: ["Guide"]
   <li><span><strong>DoH Deployment & Secure DNS:</strong> Choose trusted resolvers and consider organizational filtering, monitoring, MDM, and security requirements.</span></li>
 </ul>
 
-</div>
 
-<div class="content-card">
+
+
 
 ## DNS Over HTTPS (DoH): The Protocol That's Quietly Solving One of DNS's Oldest Problems As organizations scale, solutions like [OllaDNS](https://olladns.com) provide essential visibility and protection at this layer.
 
@@ -377,4 +376,5 @@ The goal is no longer to stop DNS encryption—it is to manage it.
   <h3 style="margin: 0; color: var(--accent);">Return to the OllaDNS Homepage →</h3>
   <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem;">Explore our Protective DNS platform and enterprise solutions.</p>
 </a>
+
 </div>
