@@ -5,6 +5,14 @@ pubDate: 2026-09-03T00:00:00.000Z
 author: "olladns Security Team"
 tags: ["Guide"]
 ---
+
+<style>
+  .card-badge {
+    font-size: 1.2rem;
+    padding: 0.3rem 0.6rem;
+  }
+</style>
+
 <div class="content-card">
   <div class="premium-card-header">
     <span class="card-badge">TL;DR</span>
@@ -81,34 +89,22 @@ It's one thing to say it blocks malicious domains. That's true but abstract. Let
 <div class="feature-grid">
 
   <div class="grid-feature-card">
-    <span class="feature-num">01</span>
-    <h4 style="color: var(--accent); margin-top: 0;">Phishing Infrastructure</h4>
-    <p>Modern phishing campaigns move fast, often spinning up fake login pages and abandoning them within hours. Protective DNS uses structural detection to flag these domains instantly, preventing the fake login page from ever loading.</p>
+    <p><strong style="color: var(--accent);">Phishing Infrastructure:</strong> Modern phishing campaigns move fast, often spinning up fake login pages and abandoning them within hours. Protective DNS uses structural detection to flag these domains instantly, preventing the fake login page from ever loading.</p>
   </div>
   <div class="grid-feature-card">
-    <span class="feature-num">02</span>
-    <h4 style="color: var(--accent); margin-top: 0;">Malware Command and Control</h4>
-    <p>Once malware lands on a device, it needs to phone home to a C2 server to receive instructions or exfiltrate data. Blocking that initial DNS lookup effectively isolates the malware and stops the attack in its tracks.</p>
+    <p><strong style="color: var(--accent);">Malware Command and Control:</strong> Once malware lands on a device, it needs to phone home to a C2 server to receive instructions or exfiltrate data. Blocking that initial DNS lookup effectively isolates the malware and stops the attack in its tracks.</p>
   </div>
   <div class="grid-feature-card">
-    <span class="feature-num">03</span>
-    <h4 style="color: var(--accent); margin-top: 0;">Domain Generation Algorithms (DGA)</h4>
-    <p>Sophisticated malware generates thousands of random domain names to evade static blocklists. Protective DNS catches these by recognizing the statistical fingerprints and entropy of algorithmically generated names.</p>
+    <p><strong style="color: var(--accent);">Domain Generation Algorithms (DGA):</strong> Sophisticated malware generates thousands of random domain names to evade static blocklists. Protective DNS catches these by recognizing the statistical fingerprints and entropy of algorithmically generated names.</p>
   </div>
   <div class="grid-feature-card">
-    <span class="feature-num">04</span>
-    <h4 style="color: var(--accent); margin-top: 0;">DNS Tunneling and Data Exfiltration</h4>
-    <p>Attackers sometimes bypass firewalls by encoding stolen data directly into DNS queries. A strong deployment detects this covert tunneling by analyzing query volume, payload size, and request frequency.</p>
+    <p><strong style="color: var(--accent);">DNS Tunneling and Data Exfiltration:</strong> Attackers sometimes bypass firewalls by encoding stolen data directly into DNS queries. A strong deployment detects this covert tunneling by analyzing query volume, payload size, and request frequency.</p>
   </div>
   <div class="grid-feature-card">
-    <span class="feature-num">05</span>
-    <h4 style="color: var(--accent); margin-top: 0;">Lookalike and Typosquat Domains</h4>
-    <p>Attackers frequently register domains that mimic trusted brands by swapping letters (like an 'l' for a '1'). Protective DNS blocks these lookalikes proactively based on visual similarity.</p>
+    <p><strong style="color: var(--accent);">Lookalike and Typosquat Domains:</strong> Attackers frequently register domains that mimic trusted brands by swapping letters (like an 'l' for a '1'). Protective DNS blocks these lookalikes proactively based on visual similarity.</p>
   </div>
   <div class="grid-feature-card">
-    <span class="feature-num">06</span>
-    <h4 style="color: var(--accent); margin-top: 0;">Newly Registered and Parked Domains</h4>
-    <p>A massive percentage of malicious infrastructure is burned down in under 48 hours. Blocking domains registered within the last 30 days is a blunt but highly effective way to eliminate fresh threats.</p>
+    <p><strong style="color: var(--accent);">Newly Registered and Parked Domains:</strong> A massive percentage of malicious infrastructure is burned down in under 48 hours. Blocking domains registered within the last 30 days is a blunt but highly effective way to eliminate fresh threats.</p>
   </div>
 </div>
 
@@ -151,28 +147,22 @@ Understanding the theory is one thing. Rolling this out across a real organizati
 <div class="feature-grid">
 
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">Start in Monitoring Mode</h4>
-    <p>The instinct with any new security control is to flip on blocking immediately. Resist that. Running protective DNS in a logging only posture for a couple of weeks first surfaces two important things: what your actual baseline traffic looks like, meaning which internal tools, SaaS platforms, and background services are quietly making DNS calls nobody remembered existed, and how much genuinely risky traffic is already present. Both of those inform how aggressively you can safely enable enforcement without breaking something a department head depends on.</p>
+    <p><strong style="color: var(--accent);">Start in Monitoring Mode:</strong> The instinct with any new security control is to flip on blocking immediately. Resist that. Running protective DNS in a logging only posture for a couple of weeks first surfaces two important things: what your actual baseline traffic looks like, meaning which internal tools, SaaS platforms, and background services are quietly making DNS calls nobody remembered existed, and how much genuinely risky traffic is already present. Both of those inform how aggressively you can safely enable enforcement without breaking something a department head depends on.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">Cover the Network and Roaming Devices</h4>
-    <p>Protection tied only to the office network offers limited value once a laptop leaves the building, and a meaningful share of modern work happens on home WiFi, coffee shops, and airport lounges. Resilient deployment applies protection at the network level for everything without an agent, such as guest devices, IoT, and unmanaged hardware, and through a lightweight roaming client on managed laptops and phones, so protection travels with the device rather than staying behind at the office door.</p>
+    <p><strong style="color: var(--accent);">Cover the Network and Roaming Devices:</strong> Protection tied only to the office network offers limited value once a laptop leaves the building, and a meaningful share of modern work happens on home WiFi, coffee shops, and airport lounges. Resilient deployment applies protection at the network level for everything without an agent, such as guest devices, IoT, and unmanaged hardware, and through a lightweight roaming client on managed laptops and phones, so protection travels with the device rather than staying behind at the office door.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">Tier Your Policy</h4>
-    <p>A finance team handling wire transfers reasonably warrants stricter policy than a general office network. A school network filtering for compliance reasons needs different category rules than a hospital network. Rather than a single policy for everyone, use sensible defaults for most of the organization, tighter rules for higher risk groups, and a fast, clear exception process for when a legitimate need collides with a block, because it will happen, and a clunky exception process is exactly how shadow IT and "just turn it off for me" requests get born.</p>
+    <p><strong style="color: var(--accent);">Tier Your Policy:</strong> A finance team handling wire transfers reasonably warrants stricter policy than a general office network. A school network filtering for compliance reasons needs different category rules than a hospital network. Rather than a single policy for everyone, use sensible defaults for most of the organization, tighter rules for higher risk groups, and a fast, clear exception process for when a legitimate need collides with a block, because it will happen, and a clunky exception process is exactly how shadow IT and "just turn it off for me" requests get born.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">Integrate with SIEM</h4>
-    <p>DNS query logs are a genuinely underrated data source for detection and incident response. Streaming that data into whatever your security team already monitors, rather than leaving it sold in a separate console nobody checks, means DNS layer signals correlate with everything else already being watched, turning protective DNS into part of a unified detection picture instead of an isolated tool with its own forgotten dashboard.</p>
+    <p><strong style="color: var(--accent);">Integrate with SIEM:</strong> DNS query logs are a genuinely underrated data source for detection and incident response. Streaming that data into whatever your security team already monitors, rather than leaving it sold in a separate console nobody checks, means DNS layer signals correlate with everything else already being watched, turning protective DNS into part of a unified detection picture instead of an isolated tool with its own forgotten dashboard.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">Have a Rollback Plan</h4>
-    <p>Any change to core network infrastructure deserves a tested fallback. What happens if the resolver has an outage? Who has the authority to revert, and how quickly? Organizations that skip this step and hit a snag in production tend to develop a lasting, and honestly unfair, grudge against the entire concept of protective DNS, when the real gap was a missing runbook.</p>
+    <p><strong style="color: var(--accent);">Have a Rollback Plan:</strong> Any change to core network infrastructure deserves a tested fallback. What happens if the resolver has an outage? Who has the authority to revert, and how quickly? Organizations that skip this step and hit a snag in production tend to develop a lasting, and honestly unfair, grudge against the entire concept of protective DNS, when the real gap was a missing runbook.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">Review Exceptions Regularly</h4>
-    <p>Every deployment accumulates allowlist exceptions over time: a domain manually permitted for a project, a category loosened because a team complained. Left unreviewed, that exception list quietly becomes its own security debt. A regular review, pruning what's no longer needed, keeps policy from slowly eroding back toward a state where basically nothing is blocked.</p>
+    <p><strong style="color: var(--accent);">Review Exceptions Regularly:</strong> Every deployment accumulates allowlist exceptions over time: a domain manually permitted for a project, a category loosened because a team complained. Left unreviewed, that exception list quietly becomes its own security debt. A regular review, pruning what's no longer needed, keeps policy from slowly eroding back toward a state where basically nothing is blocked.</p>
   </div>
 </div>
 
@@ -205,32 +195,25 @@ If you're shopping for one of these, a few things separate the genuinely strong 
 <div class="feature-grid">
 
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">Detection Speed</h4>
-    <p>Ask how fast the detection engine identifies newly registered malicious infrastructure. Hours matter enormously here, given how quickly phishing kits rotate. A provider that can show median detection time in minutes, not hours, is operating in a fundamentally different tier than one leaning mainly on static reputation feeds.</p>
+    <p><strong style="color: var(--accent);">Detection Speed:</strong> Ask how fast the detection engine identifies newly registered malicious infrastructure. Hours matter enormously here, given how quickly phishing kits rotate. A provider that can show median detection time in minutes, not hours, is operating in a fundamentally different tier than one leaning mainly on static reputation feeds.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">False Positive Rates</h4>
-    <p>Ask specifically about false positive rates, and how they're measured. A system that blocks aggressively but constantly flags legitimate traffic gets disabled by frustrated users within weeks. The most thorough filter in the world is worthless the moment IT turns it off because the help desk can't keep up with complaints.</p>
+    <p><strong style="color: var(--accent);">False Positive Rates:</strong> Ask specifically about false positive rates, and how they're measured. A system that blocks aggressively but constantly flags legitimate traffic gets disabled by frustrated users within weeks. The most thorough filter in the world is worthless the moment IT turns it off because the help desk can't keep up with complaints.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">Roaming Device Coverage</h4>
-    <p>Check whether protection extends to roaming devices, not just on network traffic. If protection evaporates the moment someone leaves the office WiFi, it's only covering a fraction of the real attack surface in a world where laptops spend more time off network than on it.</p>
+    <p><strong style="color: var(--accent);">Roaming Device Coverage:</strong> Check whether protection extends to roaming devices, not just on network traffic. If protection evaporates the moment someone leaves the office WiFi, it's only covering a fraction of the real attack surface in a world where laptops spend more time off network than on it.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">MDM Integration</h4>
-    <p>Look at deployment friction for MDM integration, whatever platform an organization already runs. A rollout that requires manually touching every device is a project that dies halfway through. Silent, MDM pushed deployment is table stake for anything beyond a handful of machines.</p>
+    <p><strong style="color: var(--accent);">MDM Integration:</strong> Look at deployment friction for MDM integration, whatever platform an organization already runs. A rollout that requires manually touching every device is a project that dies halfway through. Silent, MDM pushed deployment is table stake for anything beyond a handful of machines.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">SIEM and Identity Integration</h4>
-    <p>Check for SIEM and identity integration. Does the provider stream log into the tools a security team already uses, in a usable format? Does it sync with an identity provider so policy can be tied to actual users and groups rather than IP ranges that shift constantly as people move around?</p>
+    <p><strong style="color: var(--accent);">SIEM and Identity Integration:</strong> Check for SIEM and identity integration. Does the provider stream log into the tools a security team already uses, in a usable format? Does it sync with an identity provider so policy can be tied to actual users and groups rather than IP ranges that shift constantly as people move around?</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">Behavioral & DGA Detection</h4>
-    <p>Ask specifically about behavioral and DGA detection, not just blocklist matching. This is the clearest differentiator between protective DNS that catches modern, fast-moving threats and protective DNS that's essentially a blocklist a few days behind the threat landscape.</p>
+    <p><strong style="color: var(--accent);">Behavioral & DGA Detection:</strong> Ask specifically about behavioral and DGA detection, not just blocklist matching. This is the clearest differentiator between protective DNS that catches modern, fast-moving threats and protective DNS that's essentially a blocklist a few days behind the threat landscape.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--accent); margin-top: 0;">Security Posture</h4>
-    <p>Read the provider's actual trust and security posture rather than just the marketing page. What's their certification status, and is it in progress or complete? What data do they retain, for how long, and where does it live? Do they anonymize client IPs? A huge share of an organization's sensitive traffic metadata flows through this provider, so their own security posture matters just as much as the product's feature list.</p>
+    <p><strong style="color: var(--accent);">Security Posture:</strong> Read the provider's actual trust and security posture rather than just the marketing page. What's their certification status, and is it in progress or complete? What data do they retain, for how long, and where does it live? Do they anonymize client IPs? A huge share of an organization's sensitive traffic metadata flows through this provider, so their own security posture matters just as much as the product's feature list.</p>
   </div>
 </div>
 
@@ -251,7 +234,8 @@ And resilience is getting more attention at the infrastructure level itself, not
 
 
 
-## Frequently Asked Questions
+<div class="content-card" style="margin-top: 2rem; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; background: var(--bg-secondary);">
+<h2 style="color: var(--accent); margin-top: 0;">Frequently Asked Questions</h2>
 
 <div class="faq-container">
   <details class="faq-item">
@@ -325,9 +309,7 @@ And resilience is getting more attention at the infrastructure level itself, not
   </details>
 
 </div>
-
-
-
+</div>
 
 <div class="content-card" style="margin-top: 2rem; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; background: var(--bg-secondary);">
 <h2 style="color: var(--accent); margin-top: 0;">Bringing It All Together</h2>
