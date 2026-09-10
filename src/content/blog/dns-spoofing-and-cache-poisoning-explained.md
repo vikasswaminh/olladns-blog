@@ -1,4 +1,11 @@
 ---
+
+<style>
+  .card-badge {
+    font-size: 1.2rem;
+    padding: 0.3rem 0.6rem;
+  }
+</style>
 title: "DNS Spoofing and Cache Poisoning Explained: How Attackers Redirect Your Traffic"
 description: "DNS spoofing tricks a resolver into catching a fake answer, silently redirecting anyone who asks. Here's exactly how cache poisoning works, from the original 16-bit flaw to the Kaminsky attack, and how to stop it."
 pubDate: 2026-09-10T00:00:00.000Z
@@ -21,19 +28,19 @@ tags: ["Guide"]
 <div class="takeaway-cards">
   <div class="takeaway-card">
     <span class="takeaway-num">01</span>
-    <span class="takeaway-text">**The Mechanism:** Exactly what a resolver checks before trusting a DNS answer, and why that check was breakable from the start.</span>
+    <span class="takeaway-text"><strong>The Mechanism:</strong> Exactly what a resolver checks before trusting a DNS answer, and why that check was breakable from the start.</span>
   </div>
   <div class="takeaway-card">
     <span class="takeaway-num">02</span>
-    <span class="takeaway-text">**The Kaminsky Attack:** How one researcher's 2008 discovery turned a slow, theoretical flaw into a fast, practical one.</span>
+    <span class="takeaway-text"><strong>The Kaminsky Attack:</strong> How one researcher's 2008 discovery turned a slow, theoretical flaw into a fast, practical one.</span>
   </div>
   <div class="takeaway-card">
     <span class="takeaway-num">03</span>
-    <span class="takeaway-text">**Attack Variants:** The difference between off path cache poisoning, on path interception, and local network spoofing, and why they're not the same threat.</span>
+    <span class="takeaway-text"><strong>Attack Variants:</strong> The difference between off path cache poisoning, on path interception, and local network spoofing, and why they're not the same threat.</span>
   </div>
   <div class="takeaway-card">
     <span class="takeaway-num">04</span>
-    <span class="takeaway-text">**Real Consequences:** What happens to a victim once a poisoned entry sits in a resolver's cache.</span>
+    <span class="takeaway-text"><strong>Real Consequences:</strong> What happens to a victim once a poisoned entry sits in a resolver's cache.</span>
   </div>
   <div class="takeaway-card">
     <span class="takeaway-num">05</span>
@@ -45,7 +52,6 @@ tags: ["Guide"]
 
 <div class="content-card">
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 01</span>
 ## The Lie That Only Has to Be Told Once
 Most attacks need to fool a person. DNS spoofing only needs to fool a machine, and it only needs to do it one time. That distinction is what makes cache poisoning so quietly dangerous compared to almost anything else in the attacker's toolkit.
 
@@ -53,7 +59,6 @@ Here's the shape of it. A recursive resolver, the piece of infrastructure standi
 
 This is the part that tends to surprise people who assume DNS attacks require some kind of user error. Cache poisoning doesn't. It exploits a structural weakness in how DNS was originally built to verify that an answer is genuine, a weakness that's been known, patched around, and re discovered in new forms for over two decades. Understanding exactly how that weakness works, and how attackers have exploited it, is the whole point of this piece.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 02</span>
 ## What a Resolver Actually Checks Before Trusting an Answer
 To understand why spoofing works, you must understand what DNS was never built to do: prove, cryptographically, that an answer genuinely came from where it claims to have come from. In its original design, DNS runs almost entirely over UDP, a connectionless protocol with no handshake and no built-in way to verify a sender's identity. When your resolver asks an authoritative server, "where does this domain live," it has no inherent way of confirming that the reply landing in its inbox came from that server and not from someone else entirely.
 
@@ -61,7 +66,6 @@ So, DNS relies on a much weaker substitute for proof: matching. When a resolver 
 
 The problem should already be obvious. A 16-bit number has only 65,536 possible values. An attacker who can send enough forged responses, guessing at the transaction ID, doesn't need to intercept the real answer or see any legitimate traffic at all. They just need to flood the resolver with fake replies fast enough that one of them happens to land with the right number before the genuine answer arrives. This is, at its heart, a guessing game against a small space, and small spaces get beaten by brute force.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 03</span>
 ## The Original Off Path Attack: A Race Against a Small Number
 Before source ports were randomized, the only real barrier standing between an attacker and a successful forgery was that 16-bit transaction ID, and even that wasn't nearly as strong a barrier as it sounds.
 
@@ -71,7 +75,6 @@ During that window, the attacker fires off a flood of forged UDP responses, each
 
 This is fundamentally a race, and with only 65,536 possible transaction ID values, an attacker with enough bandwidth and enough attempts has a genuinely reasonable shot at winning it, especially against domains with short cache lifetimes that force resolvers to re query frequently, giving the attacker repeated windows of opportunity rather than just one.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 04</span>
 ## The Kaminsky Attack: Turning a Slow Problem into a Fast One
 For years, this brute force race was considered a real but somewhat impractical threat, mostly because of one limiting factor: if a domain's answer was already sitting in a resolver's cache with time left on its clock, the resolver wouldn't need to send a fresh query at all. It would just serve the cached answer, giving an attacker no fresh race to win until that cache entry expired. That natural throttling made large scale exploitation slower and harder than it might otherwise have been.
 
@@ -96,7 +99,6 @@ The real damage came from what Kaminsky's forged responses contained. Rather tha
   </div>
 </div>
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 05</span>
 ## Beyond the Classic Race: Birthday Attacks and Timing Tricks
 The core guessing game behind cache poisoning has been refined in more than one clever direction over the years, and it's worth understanding a couple of the more notable variants, because they illustrate just how much creativity has gone into squeezing more advantage out of a fundamentally small number space.
 
@@ -104,7 +106,6 @@ A birthday attack borrows its name from the well-known probability puzzle about 
 
 Timing matters just as much as raw guessing power. An attacker who can influence when a resolver actually sends its upstream query, for instance by controlling when a victim's browser requests a resource that triggers the lookup, gains a meaningful edge, because they know roughly when the race window opens rather than having to spray guesses continuously and hope to catch a window they can't see. Combined with the Kaminsky technique's ability to force fresh queries on demand, an attacker gets both a predictable timing window and an effectively unlimited number of attempts, which is precisely the combination that makes off path cache poisoning a practical threat rather than a purely theoretical one.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 06</span>
 ## When the Attacker Doesn't Have to Guess at All: On Path Interception
 Everything described so far assumes the attacker is off path, meaning they have no direct visibility into the real traffic between the resolver and the authoritative server, and must guess blindly at transaction IDs and source ports. That's the harder version of the problem for an attacker to solve. There's a meaningfully easier version, and it matters just as much in practice.
 
@@ -114,7 +115,6 @@ This is the scenario behind attacks on public Wi-Fi networks, compromised router
 
 The practical takeaway is that DNS spoofing isn't one single attack technique with one single fix. It's a family of related techniques, off path guessing games exploiting weak entropy, on path interception exploiting network position, and local redirection exploiting trust in DHCP, all converging on the same outcome: a device ends up with a false belief about where a domain name lives.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 07</span>
 ## What Actually Happens Once the Cache Is Poisoned
 It's worth walking through the concrete, practical consequences once a poisoned entry lands, because the abstract description of "the resolver caches a fake answer" undersells how much damage flows from that one moment.
 
@@ -143,7 +143,6 @@ It's worth walking through the concrete, practical consequences once a poisoned 
   </div>
 </div>
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 08</span>
 ## Why HTTPS Doesn't Fully Save You
 A common and reasonable assumption is that the widespread adoption of HTTPS has quietly neutralized most of the danger here, since an attacker redirecting traffic to their own server still can't present a certificate that matches the real domain, and browsers will flag that mismatch loudly. There's truth in this, and it's genuinely one of the biggest reasons DNS spoofing is a less catastrophic threat today than it was in the pre-HTTPS everywhere era.
 
@@ -151,7 +150,6 @@ But it's an incomplete picture, and it's worth being honest about exactly where 
 
 There's also a subtler problem: DNS spoofing can be used not just to redirect a connection outright, but to interfere with the process before certificate checking ever becomes relevant, forcing a connection failure, degrading a secure connection into an insecure fallback where one is misconfigured to allow it, or simply denying service by pointing critical infrastructure domains nowhere useful at all. HTTPS raises the bar considerably for the most visible, most damaging version of this attack, website credential theft, but it doesn't retire DNS spoofing as a threat, it just narrows where the remaining danger concentrates.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 09</span>
 ## The Defenses: What Actually Closes the Gap
 The security community's response to cache poisoning has unfolded in layers over more than two decades, and it's worth understanding what each layer contributes, because some genuinely closed real gaps while others only raised the cost of the attack without eliminating the underlying weakness.
 
@@ -180,7 +178,6 @@ The security community's response to cache poisoning has unfolded in layers over
 
 And then there's DNSSEC, which is genuinely different in kind from everything listed above, because it's the only defense on this list that doesn't rely on making guessing harder, it makes guessing irrelevant. DNSSEC has authoritative servers cryptographically sign their DNS records, and validating resolvers check that signature against a chain of trust rooted all the way back to the DNS root itself. An attacker who successfully forges a response still fails, because the forged answer either carries no valid signature at all, or carries a signature that doesn't verify correctly, and a DNSSEC validating resolver simply discards it regardless of how perfectly the attacker guessed the transaction ID and source port. This is the closest thing DNS has to a structural, rather than probabilistic, fix for spoofing, though it depends entirely on both the domain being signed and the resolver validating, and adoption on both sides remains meaningfully incomplete across the internet even now.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 10</span>
 ## SAD DNS and the Ongoing Cat and Mouse Game
 It would be comforting to say source port randomization and the layers built on top of it permanently closed this chapter, but honest history says otherwise. Researchers have repeatedly found new side channels that let an attacker recover information the defenses were specifically designed to hide, without ever needing to see the actual traffic on the wire.
 
@@ -188,7 +185,6 @@ One notable line of research, generally referred to as SAD DNS, demonstrated tha
 
 The lesson here isn't that any individual defense failed outright, it's that DNS spoofing has never been a single vulnerability with a single patch. It's been an ongoing structural weakness, rooted in the protocol's original reliance on matching rather than cryptographic proof, that each generation of defenses has narrowed a little further without fully closing. Every meaningful advance so far, source port randomization, 0x20 encoding, DNS cookies, rate limiting, has raised the bar. None of them, on their own, has made the underlying race disappear entirely. Only DNSSEC changes the fundamental nature of the problem, by replacing the race with a cryptographic check, and it's precisely because DNSSEC adoption remains uneven that the rest of this layered defense still matters as much as it does today.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 11</span>
 ## What a Well-Built Resolver Actually Does Differently
 Given all of this, the practical question for anyone running real infrastructure isn't whether DNS spoofing is theoretically possible, it clearly is, it's whether the resolver handling your organization's queries is built to make it genuinely difficult rather than merely inconvenient.
 
@@ -211,7 +207,6 @@ Given all of this, the practical question for anyone running real infrastructure
   </div>
 </div>
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 12</span>
 ## Practical Steps Beyond Just Trusting Your Resolver
 Choosing a resolver built with these defenses in mind is the single highest leverage decision here, but it's not the only lever available, and a genuinely careful security posture layers a few more habits on top of it.
 
@@ -303,9 +298,8 @@ Choosing a resolver built with these defenses in mind is the single highest leve
 <h2 style="color: black;">Bringing It All Together</h2>
 DNS spoofing endures because the protocol was built for a more trusting internet. While modern patches—from source port randomization to DNSSEC—have raised the bar, the threat is not purely historical; new techniques like SAD DNS and rogue access points still bypass older defenses. To stay resilient, organizations must move beyond assuming this is a solved problem and instead adopt resolvers built with robust entropy, DNSSEC validation, active anomaly detection, and deep visibility. The lie only has to be told once, and your best defense is a resolver that’s actually paying attention.
 
-<a href="https://olladns.com" class="content-card" style="display: block; text-align: center; text-decoration: none; margin-top: 2rem; border: 2px solid var(--accent); transition: transform 0.2s ease;">
-  <h3 style="margin: 0; color: var(--accent);">Return to the OllaDNS Homepage →</h3>
-  <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem;">Explore our Protective DNS platform and enterprise solutions.</p>
+<a href="https://olladns.com" class="content-card" style="display: block; text-align: center; text-decoration: none; margin: 2rem auto 0; padding: 1rem 2rem; max-width: 200px; border: 2px solid var(--accent); transition: transform 0.2s ease;">
+  <h3 style="margin: 0; color: var(--accent);">OllaDNS</h3>
 </a>
 
 </div>
