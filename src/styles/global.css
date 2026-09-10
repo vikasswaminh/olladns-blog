@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   --accent: #DA291C;
   --bg: #ffffff;
   --bg-soft: #f6f8fb;
@@ -12,15 +13,7 @@
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0c0f14;
-    --bg-soft: #12161d;
-    --border: #232a35;
-    --text: #e7ebf0;
-    --muted: #9aa4b2;
-  }
-}
+
 
 * {
   box-sizing: border-box;
@@ -450,18 +443,7 @@ main.container {
 }
 
 /* Subtle background on hover for dark mode compatibility */
-@media (prefers-color-scheme: dark) {
-  .left-navigation-sidebar,
-  .right-navigation-sidebar {
-    background: var(--bg);
-  }
-  .sidebar-card {
-    background: var(--bg-soft);
-  }
-  .sidebar-card:hover {
-    background: color-mix(in srgb, var(--accent) 5%, var(--bg-soft));
-  }
-}
+
 
 /* Table of Contents */
 .toc-container {
@@ -601,12 +583,7 @@ main.container {
   box-shadow: 0 8px 32px -4px rgba(218, 41, 28, 0.14), 0 2px 8px rgba(0,0,0,0.05);
 }
 
-@media (prefers-color-scheme: dark) {
-  .content-card {
-    background: var(--bg-soft);
-    box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.2);
-  }
-}
+
 
 
 
@@ -1406,6 +1383,7 @@ main.container {
 
 /* --- STRICT STATIC DOCS REDESIGN --- */
 :root {
+  color-scheme: light;
   --text: #1a1f29;
   --muted: #667085;
   --accent: #DA291C;
@@ -1415,17 +1393,7 @@ main.container {
   --bg-alt: #f6f8fb;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #e7ebf0;
-    --muted: #9aa4b2;
-    --accent: #ef4444;
-    --brand-primary: #e7ebf0;
-    --border: #232a35;
-    --bg: #0c0f14;
-    --bg-alt: #12161d;
-  }
-}
+
 
 /* Base resets for doc layout */
 body {
@@ -2148,10 +2116,10 @@ body {
 .mb-4 { margin-bottom: 1.25rem; }
 
 .badge-orange { background: #fff7ed; color: #ea580c; border: 1px solid #fdba74; }
-@media (prefers-color-scheme: dark) { .badge-orange { background: rgba(234, 88, 12, 0.1); border-color: rgba(234, 88, 12, 0.3); } }
+
 
 .badge-purple { background: #faf5ff; color: #9333ea; border: 1px solid #d8b4fe; }
-@media (prefers-color-scheme: dark) { .badge-purple { background: rgba(147, 51, 234, 0.1); border-color: rgba(147, 51, 234, 0.3); } }
+
 
 .badge-glass {
   background: rgba(255, 255, 255, 0.2);
@@ -2511,6 +2479,7 @@ body {
 /* --- SUPER BLOG REDESIGN --- */
 
 :root {
+  color-scheme: light;
   --accent-pink: #ec4899;
   --accent-pink-light: rgba(236, 72, 153, 0.1);
   --accent-blue: #3b82f6;
