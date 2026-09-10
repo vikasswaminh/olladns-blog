@@ -1,4 +1,10 @@
 ---
+title: "DNS Spoofing and Cache Poisoning Explained: How Attackers Redirect Your Traffic"
+description: "DNS spoofing tricks a resolver into catching a fake answer, silently redirecting anyone who asks. Here's exactly how cache poisoning works, from the original 16-bit flaw to the Kaminsky attack, and how to stop it."
+pubDate: 2026-09-10T00:00:00.000Z
+author: "olladns Security Team"
+tags: ["Guide"]
+---
 
 <style>
   .card-badge {
@@ -6,12 +12,6 @@
     padding: 0.3rem 0.6rem;
   }
 </style>
-title: "DNS Spoofing and Cache Poisoning Explained: How Attackers Redirect Your Traffic"
-description: "DNS spoofing tricks a resolver into catching a fake answer, silently redirecting anyone who asks. Here's exactly how cache poisoning works, from the original 16-bit flaw to the Kaminsky attack, and how to stop it."
-pubDate: 2026-09-10T00:00:00.000Z
-author: "olladns Security Team"
-tags: ["Guide"]
----
 <div class="content-card">
   <div class="premium-card-header">
     <span class="card-badge">TL;DR</span>
