@@ -234,6 +234,8 @@ And resilience is getting more attention at the infrastructure level itself, not
 
 
 
+</div>
+
 <div class="content-card" style="margin-top: 2rem; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; background: var(--bg-secondary);">
 <h2 style="color: var(--accent); margin-top: 0;">Frequently Asked Questions</h2>
 
