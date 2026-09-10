@@ -22,29 +22,23 @@ Every cyberattack, from phishing to ransomware to command-and-control communicat
 <div class="takeaway-cards">
   <div class="takeaway-card">
     <span class="takeaway-num">01</span>
-    <span class="takeaway-text">**Every attack must ask, "where is this domain?" first.** Phishing, malware, ransomware, command and control traffic all rely on a DNS lookup before anything malicious can happen, which makes the resolver the earliest possible point to stop them.</span>
+    <span class="takeaway-text"><strong>Every attack must ask, "where is this domain?" first.</strong> Phishing, malware, ransomware, command and control traffic all rely on a DNS lookup before anything malicious can happen, which makes the resolver the earliest possible point to stop them.</span>
   </div>
   <div class="takeaway-card">
     <span class="takeaway-num">02</span>
-    <span class="takeaway-text">**Protective DNS blocks the lookup, not just the payload.** Instead of reacting to a threat after it arrives, it prevents the connection from forming in the first place, regardless of whether the malicious link came through email, SMS, a QR code, or anything else.</span>
+    <span class="takeaway-text"><strong>Protective DNS blocks the lookup, not just the payload.</strong> Instead of reacting to a threat after it arrives, it prevents the connection from forming in the first place, regardless of whether the malicious link came through email, SMS, a QR code, or anything else.</span>
   </div>
   <div class="takeaway-card">
     <span class="takeaway-num">03</span>
-    <span class="takeaway-text">**It catches what firewalls and antivirus structurally can't.** Firewalls watch IPs and ports that attackers rotate constantly, and antivirus only covers devices with an agent installed. Protective DNS covers every device that is resolved through it, agent or no agent.</span>
+    <span class="takeaway-text"><strong>It catches what firewalls and antivirus structurally can't.</strong> Firewalls watch IPs and ports that attackers rotate constantly, and antivirus only covers devices with an agent installed. Protective DNS covers every device that is resolved through it, agent or no agent.</span>
   </div>
   <div class="takeaway-card">
     <span class="takeaway-num">04</span>
-    <span class="takeaway-text">**Behavioral detection matters more than static blocklists.** Modern threats like DGA based malware and fast-moving phishing kits move too quickly for daily updated blocklists to keep up, which is why detection speed and pattern-based analysis are the real differentiators between providers.</span>
+    <span class="takeaway-text"><strong>Behavioral detection matters more than static blocklists.</strong> Modern threats like DGA based malware and fast-moving phishing kits move too quickly for daily updated blocklists to keep up, which is why detection speed and pattern-based analysis are the real differentiators between providers.</span>
   </div>
   <div class="takeaway-card">
     <span class="takeaway-num">05</span>
-    <span class="takeaway-text">**Deployment discipline matters as much as technology.** Starting in monitoring mode, covering roaming devices, tiering policy, integrating logs into a SIEM, and having a tested rollback plan are what separate a smooth rollout from one that quietly gets disabled after the first false positive.
-
-
-
-
-
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 01</span></span>
+    <span class="takeaway-text"><strong>Deployment discipline matters as much as technology.</strong></span>
   </div>
 </div>
 </div>
@@ -64,7 +58,7 @@ This is a genuinely different model from most security tooling, and it's worth p
 
 There's an analogy that tends to land well here. Imagine airport security, but instead of screening passengers as they walk through a metal detector, you could simply know, in advance, that a particular flight's destination airport has been flagged as compromised, and just not let the plane take off. That's roughly the difference between protective DNS and most other security layers. It's not screening the payload as it arrives. It's refusing to let the journey start in the first place.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 02</span>
+
 ## How the Resolver Becomes a Security Checkpoint
 To understand why protective DNS works so well, it helps to understand exactly where in the DNS resolution process it sits, and why that position is so valuable.
 
@@ -80,7 +74,7 @@ Contrast with a tool like email security, which only sees threats that arrive th
 
 It's also worth noting that the checkpoint isn't a single monolithic gate. A mature protective DNS deployment usually enforces this check at multiple points simultaneously: at the network level for anything connected to the corporate network, and through a lightweight roaming client on managed devices so the protection travels with the laptop out the door, onto home WiFi, into a coffee shop, wherever the device actually goes. Because a huge share of modern work doesn't happen inside a nicely fenced office network anymore, and protection that stops at the office door isn't protecting much of anything.
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 03</span>
+
 ## What Protective DNS Actually Blocks
 It's one thing to say it blocks malicious domains. That's true but abstract. Let's get specific about the categories of threats protective DNS is stopping in practice, because each one exploits DNS a little differently.
 
@@ -88,38 +82,38 @@ It's one thing to say it blocks malicious domains. That's true but abstract. Let
 
   <div class="grid-feature-card">
     <span class="feature-num">01</span>
-    <h4>Phishing Infrastructure</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Phishing Infrastructure</h4>
     <p>Modern phishing campaigns move fast, often spinning up fake login pages and abandoning them within hours. Protective DNS uses structural detection to flag these domains instantly, preventing the fake login page from ever loading.</p>
   </div>
   <div class="grid-feature-card">
     <span class="feature-num">02</span>
-    <h4>Malware Command and Control</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Malware Command and Control</h4>
     <p>Once malware lands on a device, it needs to phone home to a C2 server to receive instructions or exfiltrate data. Blocking that initial DNS lookup effectively isolates the malware and stops the attack in its tracks.</p>
   </div>
   <div class="grid-feature-card">
     <span class="feature-num">03</span>
-    <h4>Domain Generation Algorithms (DGA)</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Domain Generation Algorithms (DGA)</h4>
     <p>Sophisticated malware generates thousands of random domain names to evade static blocklists. Protective DNS catches these by recognizing the statistical fingerprints and entropy of algorithmically generated names.</p>
   </div>
   <div class="grid-feature-card">
     <span class="feature-num">04</span>
-    <h4>DNS Tunneling and Data Exfiltration</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">DNS Tunneling and Data Exfiltration</h4>
     <p>Attackers sometimes bypass firewalls by encoding stolen data directly into DNS queries. A strong deployment detects this covert tunneling by analyzing query volume, payload size, and request frequency.</p>
   </div>
   <div class="grid-feature-card">
     <span class="feature-num">05</span>
-    <h4>Lookalike and Typosquat Domains</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Lookalike and Typosquat Domains</h4>
     <p>Attackers frequently register domains that mimic trusted brands by swapping letters (like an 'l' for a '1'). Protective DNS blocks these lookalikes proactively based on visual similarity.</p>
   </div>
   <div class="grid-feature-card">
     <span class="feature-num">06</span>
-    <h4>Newly Registered and Parked Domains</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Newly Registered and Parked Domains</h4>
     <p>A massive percentage of malicious infrastructure is burned down in under 48 hours. Blocking domains registered within the last 30 days is a blunt but highly effective way to eliminate fresh threats.</p>
   </div>
 </div>
 
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 04</span>
+
 ## The Mechanics Behind the Curtain
 None of this works on vibes. A protective DNS service is only as good as the intelligence and detection logic feeding its decisions, so it's worth understanding what's happening under the hood.
 Threat intelligence feeds from the baseline layer. These are continuously updated lists of domains confirmed to be associated with phishing, malware, botnets, and other malicious activity, aggregated from research teams, honeypots, sandboxed malware analysis, and shared intelligence across the security community. This is the part that most closely resembles a traditional blocklist, and while it's necessary, it's not sufficient on its own, because it's inherently reactive. Something must be identified as bad before it makes the list.
@@ -130,7 +124,7 @@ Put together, these layers work in sequence. Known bad domains get caught immedi
 
 
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 05</span>
+
 ## Protective DNS vs. Firewalls, Antivirus, and Secure Web Gateways
 A reasonable question at this point is whether, if you're already running a firewall and endpoint protection, you need this too.
 Yes, and it helps to reframe the question from "instead of" to "in addition to," because each of these tools is watching a different signal, and each has a blind spot that protective DNS is specifically positioned to fill.
@@ -141,7 +135,7 @@ None of this makes the other tools redundant. A layered security posture genuine
 
 
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 06</span>
+
 ## Why This Isn't Theoretical
 It's easy for a topic built on protocols and threat intelligence to feel abstract, so let's ground it in what happens without this layer in place.
 Consider a mid-sized organization with no DNS layer protection. An employee receives a well-crafted phishing email referencing an internal project, with a link to what looks like a shared document. The domain was registered six hours ago. It hasn't made it onto any static reputation blocklist yet, since those typically update on a daily cadence at best. The employee clicks. Their browser resolves the domain without hesitation, because nothing in the resolution path is asking any questions. The fake login page loads, looking pixel perfect. Credentials get typed in. Within minutes, those credentials are being used somewhere else entirely.
@@ -150,41 +144,41 @@ That pattern repeats across almost every serious attack category. Business email
 
 
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 07</span>
+
 ## What a Real Protective DNS Deployment Looks Like
 Understanding the theory is one thing. Rolling this out across a real organization, with real legacy systems and real people who get annoyed when something they rely on suddenly breaks, is another. A few things separate a smooth deployment from a painful one.
 
 <div class="feature-grid">
 
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">Start in Monitoring Mode</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Start in Monitoring Mode</h4>
     <p>The instinct with any new security control is to flip on blocking immediately. Resist that. Running protective DNS in a logging only posture for a couple of weeks first surfaces two important things: what your actual baseline traffic looks like, meaning which internal tools, SaaS platforms, and background services are quietly making DNS calls nobody remembered existed, and how much genuinely risky traffic is already present. Both of those inform how aggressively you can safely enable enforcement without breaking something a department head depends on.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">Cover the Network and Roaming Devices</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Cover the Network and Roaming Devices</h4>
     <p>Protection tied only to the office network offers limited value once a laptop leaves the building, and a meaningful share of modern work happens on home WiFi, coffee shops, and airport lounges. Resilient deployment applies protection at the network level for everything without an agent, such as guest devices, IoT, and unmanaged hardware, and through a lightweight roaming client on managed laptops and phones, so protection travels with the device rather than staying behind at the office door.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">Tier Your Policy</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Tier Your Policy</h4>
     <p>A finance team handling wire transfers reasonably warrants stricter policy than a general office network. A school network filtering for compliance reasons needs different category rules than a hospital network. Rather than a single policy for everyone, use sensible defaults for most of the organization, tighter rules for higher risk groups, and a fast, clear exception process for when a legitimate need collides with a block, because it will happen, and a clunky exception process is exactly how shadow IT and "just turn it off for me" requests get born.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">Integrate with SIEM</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Integrate with SIEM</h4>
     <p>DNS query logs are a genuinely underrated data source for detection and incident response. Streaming that data into whatever your security team already monitors, rather than leaving it sold in a separate console nobody checks, means DNS layer signals correlate with everything else already being watched, turning protective DNS into part of a unified detection picture instead of an isolated tool with its own forgotten dashboard.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">Have a Rollback Plan</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Have a Rollback Plan</h4>
     <p>Any change to core network infrastructure deserves a tested fallback. What happens if the resolver has an outage? Who has the authority to revert, and how quickly? Organizations that skip this step and hit a snag in production tend to develop a lasting, and honestly unfair, grudge against the entire concept of protective DNS, when the real gap was a missing runbook.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">Review Exceptions Regularly</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Review Exceptions Regularly</h4>
     <p>Every deployment accumulates allowlist exceptions over time: a domain manually permitted for a project, a category loosened because a team complained. Left unreviewed, that exception list quietly becomes its own security debt. A regular review, pruning what's no longer needed, keeps policy from slowly eroding back toward a state where basically nothing is blocked.</p>
   </div>
 </div>
 
 
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 08</span>
+
 ## The Value That Goes Beyond Blocking
 It's tempting to think of protective DNS purely in terms of what it stops, but a well implemented deployment delivers a second, quieter benefit: visibility.
 DNS query logs, aggregated across an entire organization, are a genuinely rich dataset for understanding what's happening on a network. They show which devices are reaching out to unusual domains at odd hours, which SaaS tools different teams are using versus what's officially sanctioned, and where query volume spikes unexpectedly, which can be an early sign of something worth investigating even when nothing gets outright blocked. That data, streamed into a SIEM and correlated with other signals, turns DNS from invisible background plumbing into an active part of an organization's detection picture.
@@ -193,7 +187,7 @@ And there's a simpler, more human benefit too: fewer fire drills. When phishing 
 
 
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 09</span>
+
 ## Common Myths, Cleared Up
 A handful of misconceptions come up often enough that they're worth addressing directly.
 "We already have a firewall, so we're covered." Firewalls and protective DNS work on different signals, IP address and port versus domain name, and attackers specifically exploit that gap by rotating infrastructure faster than IP based rules can keep pace with. They're complementary, not redundant.
@@ -204,45 +198,45 @@ A handful of misconceptions come up often enough that they're worth addressing d
 
 
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 10</span>
+
 ## A Practical Checklist for Evaluating Protective DNS Providers
 If you're shopping for one of these, a few things separate the genuinely strong options from the merely adequate ones, and they're worth digging into directly rather than taking a sales deck's word for it.
 
 <div class="feature-grid">
 
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">Detection Speed</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Detection Speed</h4>
     <p>Ask how fast the detection engine identifies newly registered malicious infrastructure. Hours matter enormously here, given how quickly phishing kits rotate. A provider that can show median detection time in minutes, not hours, is operating in a fundamentally different tier than one leaning mainly on static reputation feeds.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">False Positive Rates</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">False Positive Rates</h4>
     <p>Ask specifically about false positive rates, and how they're measured. A system that blocks aggressively but constantly flags legitimate traffic gets disabled by frustrated users within weeks. The most thorough filter in the world is worthless the moment IT turns it off because the help desk can't keep up with complaints.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">Roaming Device Coverage</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Roaming Device Coverage</h4>
     <p>Check whether protection extends to roaming devices, not just on network traffic. If protection evaporates the moment someone leaves the office WiFi, it's only covering a fraction of the real attack surface in a world where laptops spend more time off network than on it.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">MDM Integration</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">MDM Integration</h4>
     <p>Look at deployment friction for MDM integration, whatever platform an organization already runs. A rollout that requires manually touching every device is a project that dies halfway through. Silent, MDM pushed deployment is table stake for anything beyond a handful of machines.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">SIEM and Identity Integration</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">SIEM and Identity Integration</h4>
     <p>Check for SIEM and identity integration. Does the provider stream log into the tools a security team already uses, in a usable format? Does it sync with an identity provider so policy can be tied to actual users and groups rather than IP ranges that shift constantly as people move around?</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">Behavioral & DGA Detection</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Behavioral & DGA Detection</h4>
     <p>Ask specifically about behavioral and DGA detection, not just blocklist matching. This is the clearest differentiator between protective DNS that catches modern, fast-moving threats and protective DNS that's essentially a blocklist a few days behind the threat landscape.</p>
   </div>
   <div class="grid-feature-card">
-    <h4 style="color: var(--text-main); margin-top: 0;">Security Posture</h4>
+    <h4 style="color: var(--accent); margin-top: 0;">Security Posture</h4>
     <p>Read the provider's actual trust and security posture rather than just the marketing page. What's their certification status, and is it in progress or complete? What data do they retain, for how long, and where does it live? Do they anonymize client IPs? A huge share of an organization's sensitive traffic metadata flows through this provider, so their own security posture matters just as much as the product's feature list.</p>
   </div>
 </div>
 
 
 
-<span style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem;">Section 11</span>
+
 ## Where Protective DNS Is Headed
 A few trends are worth watching, because they'll shape what "good" looks like over the next few years.
 Detection is moving steadily away from static reputation lists and toward behavioral and structural analysis, recognizing the shape of a malicious campaign through registration patterns, structural brand similarity, and query timing anomalies, rather than waiting to recognize a specific known bad domain by name. This shift is largely what's making sub hour, sometimes sub minute detection of freshly spun phishing infrastructure achievable at all.
@@ -335,17 +329,16 @@ And resilience is getting more attention at the infrastructure level itself, not
 
 
 
-## Bringing It All Together
+<div class="content-card" style="margin-top: 2rem; border: 1px solid var(--border); border-radius: 8px; padding: 2rem; background: var(--bg-secondary);">
+<h2 style="color: var(--accent); margin-top: 0;">Bringing It All Together</h2>
 Protective DNS isn't a replacement for your firewall or antivirus—it's the critical first line of defense that catches what they miss. By analyzing every domain lookup, it stops threats at the earliest possible stage, before any connection is even established.
 
 > The internet asks the same question billions of times a second: "Where is this domain?" **Protective DNS is simply the decision to start paying attention to the answer, before it's too late.**
 
-
-
-
-<a href="https://olladns.com" class="content-card" style="display: block; text-align: center; text-decoration: none; margin-top: 2rem; border: 2px solid var(--accent); transition: transform 0.2s ease;">
-  <h3 style="margin: 0; color: var(--accent);">Return to the OllaDNS Homepage →</h3>
-  <p style="margin: 0.5rem 0 0; color: var(--muted); font-size: 0.9rem;">Explore our Protective DNS platform and enterprise solutions.</p>
+<a href="https://olladns.com" class="content-card" style="display: block; text-align: center; text-decoration: none; margin: 2rem auto 0; padding: 1rem 2rem; max-width: 200px; border: 2px solid var(--accent); transition: transform 0.2s ease;">
+  <h3 style="margin: 0; color: var(--accent);">OllaDNS</h3>
 </a>
+
+</div>
 
 </div>
